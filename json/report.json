@@ -1,0 +1,173 @@
+[{
+    "name":"VBox",
+    "pic":"vbox.jpg",
+    "subIssues":[{
+        "name":"La VBox ne s'allume pas",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"L'écran de la VBox du Vélib reste éteint et semble ne pas pouvoir s'allumer"
+    },{
+        "name":"Ecran cassé ou dysfonctionnel",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage"
+    },{
+        "name":"La batterie s'arrête en milieu de course",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
+    },{
+        "name":"La VBox affiche une erreur",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo est bloqué dans la bornette et affiche une erreur"
+    }]
+},{
+    "name":"Bloqué station",
+    "pic":"station.jpg",
+    "subIssues":[{
+        "name":"VBox éteinte",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"L'écran de la VBox du Vélib reste éteint et semble ne pas pouvoir s'allumer"
+    },{
+        "name":"Vélo déverouillé mais ne sort pas de la borne",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo ne sort pas de la bornette une fois dévérouillé"
+    },{
+        "name":"Erreur 01",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo ne se déverouille pas (Erreur 01)"
+    },{
+        "name":"Erreur 30",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo ne se déverouille pas (Erreur 30)"
+    },{
+        "name":"Erreur 50",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo ne se déverouille pas (Erreur 50)"
+    },{
+        "name":"Autre erreur",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo ne se déverouille pas"
+    }]
+},{
+    "name":"Batterie",
+    "pic":"batterie.jpg",
+    "subIssues":[{
+        "name":"La batterie est inefficace",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib semble ne pas fonctionner"
+    },{
+        "name":"La batterie ne se recharge pas",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib semble ne pas se recharger"
+    },{
+        "name":"La batterie marche à moitié",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib ne marche pas toujours, elle marche à moitié"
+    },{
+        "name":"La batterie s'arrête en milieu de course",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
+    }]
+},{
+    "name":"Pédales/Chaîne",
+    "pic":"pedale.jpg",
+    "subIssues":[{
+        "name":"Pédale dans le vide (chaîne manquante ou déraillée)",
+        "error:":"Chaîne cassée ou déraillée",
+        "message":"La chaîne est cassée (le vélo pédale dans le vide)"
+    },{
+        "name":"Chaîne qui déraille légerement pendant la course",
+        "error":"Chaîne cassée ou déraillée",
+        "message":"La chaîne déraille légérement pendant la course"
+    },{
+        "name":"Pédale(s) manquante(s)",
+        "error":"Pédale(s) manquante(s)",
+        "message":"Il manque les pédales au Vélib"
+    },{
+        "name":"Pédale(s) bloquée(s)",
+        "error":"Pédalier bloqué",
+        "message":"Les pédales du Vélibs sont bloquées"
+    }]
+},{
+    "name":"Roues/Pneus",
+    "pic":"roue.jpg",
+    "subIssues":[{
+        "name":"La roue est tordue",
+        "error":"Roue voilée",
+        "message":"La roue du Vélib est tordue"
+    },{
+        "name":"La roue est bloquée",
+        "error":"Roue bloquée",
+        "message":"La roue du Vélib est bloquée"
+    },{
+        "name":"La roue est dessérée",
+        "error":"Roue desserrée",
+        "message":"La roue du Vélib n'est pas assez sérrée"
+    },{
+        "name":"Pneu crevé ou dégonflé",
+        "error":"Pneu dégonflé ou perçé",
+        "message":"Le pneu du Vélib est à plat"
+    },{
+        "name":"Chambre à air sortie",
+        "error":"Pneu dégonflé ou perçé",
+        "message":"Le pneu est complétement défoncé (chambre à air sortie)"
+    }]
+},{
+    "name":"Selle",
+    "pic":"selle.jpg",
+    "subIssues":[{
+        "name":"Selle manquante",
+        "error":"Selle manquante",
+        "message":"Il n'y a pas de selle sur ce Vélib"
+    },{
+        "name":"Selle abimée",
+        "error":"Selle et/ou poignées abîmées",
+        "message":"La selle de ce Vélib est abimée"
+    },{
+        "name":"Selle non fixable",
+        "error":"Selle et/ou poignées abîmées",
+        "message":"On ne peut pas fixer la selle sur ce Vélib"
+    }]
+},{
+    "name":"Freins et Poignées",
+    "pic":"frein.jpg",
+    "subIssues":[{
+        "name":"Frein(s) manquant(s)",
+        "error":"Dysfonctionnement des freins",
+        "message":"Il manque des freins sur ce Vélib"
+    },{
+        "name":"Frein(s) coupé(s)",
+        "error":"Dysfonctionnement des freins",
+        "message":"Les freins ont étés coupés"
+    },{
+        "name":"Ne freine pas assez",
+        "error":"Dysfonctionnement des freins",
+        "message":"Il est difficile de freiner avec ce Vélib"
+    },{
+        "name":"Freine trop brutalement",
+        "error":"Dysfonctionnement des freins",
+        "message":"Le Vélib freine trop brutalement"
+    },{
+        "name":"Sélecteur de vitesse cassé",
+        "error":"Selle et/ou poignées abîmées",
+        "message":"Le sélecteur de vitesse est cassé"
+    },{
+        "name":"Poignée(s) abîmée(s)",
+        "error":"Selle et/ou poignées abîmées",
+        "message":"Les poignées du Vélib sont abîmées"
+    }]
+},{
+    "name":"Lumières/Feux",
+    "pic":"feux.jpg",
+    "subIssues":[{
+        "name":"Feux avants cassés",
+        "error":"Dysfonctionnement des feux",
+        "message":"Le feu AVANT est cassé"
+    },{
+        "name":"Feux arrières cassés",
+        "error":"Dysfonctionnement des feux",
+        "message":"Le feu ARRIERE est cassé"
+    },{
+        "name":"Feux avants et arrières cassés",
+        "error":"Dysfonctionnement des feux",
+        "message":"Les feux AVANT et ARRIERE sont cassés"
+    }]
+}]
