@@ -131,7 +131,7 @@ export default class HomeScreen extends React.Component{
               
         getItemValue("@user_infos").then((res) => this.setState({userInfos:JSON.parse(res)}));   
         
-        let infos  = require('./app.json');
+        let infos  = require('../app.json');
         this.setState({version:infos.expo.version});
     }
     componentWillUnmount() {
@@ -200,7 +200,7 @@ export default class HomeScreen extends React.Component{
                 style={styles.middleTop}>
                   <Image
                   style={{height:40,width:180}}
-                  source={require('./assets/logo.png')}
+                  source={require('../assets/logo.png')}
                   />
                   <Text style={{color:"white"}}>{today_str}</Text>
                 </View>

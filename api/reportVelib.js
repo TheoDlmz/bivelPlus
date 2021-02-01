@@ -7,16 +7,6 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
         }else{
             bivel_id = bivelId;
         }
-        let user_data;
-        if (user == undefined){
-            user_data = {id:"",
-            firstname:"Anonyme",
-            lastname:"Anonyme",
-            email:"Anonyme"}
-        }else{
-            user_data = user;
-        }
-
         let message = error.message;
         let station = "";
         if (closest){
@@ -25,7 +15,7 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
         }
         let data = {
             "00N0Y00000RKgb2":bikeId,
-            "00N0Y00000RKgb3":user_data.id,
+            "00N0Y00000RKgb3":user.id,
             "retURL":"",
             "recordType":"0120Y000000Kezr",
             "description":"",
@@ -33,11 +23,11 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             "00N0Y00000RKgb3":"Vélo endommagé",
             "00N0Y00000RKgat":error.error,
             "orgid":"00D0Y0000035SQ3",
-            "00N0Y00000RKgb7":user_data.firstname,
+            "00N0Y00000RKgb7":user.firstname,
             "00N0Y00000RKgb8":message + "\n Envoyé depuis BVP.",
             "debugEmail":"",
-            "name":user_data.lastname,
-            "email":user_data.email
+            "name":user.lastname,
+            "email":user.email
         };
 
         let data_Bivel ={
