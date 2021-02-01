@@ -1,0 +1,324 @@
+[
+    {
+        "Id":"debut",
+        "Titre":"Débutant",
+        "Mesure":"total",
+        "Pic":"debutant.jpg",
+        "Descriptions": 
+        [{
+            "Description":"Bravo, vous êtes désormais un utilisateur Vélib !",
+            "Seuil":1
+        }]
+    },
+
+    {
+        "Id":"elec",
+        "Titre":"Super-mamie",
+        "Pic":"electrique.jpg",
+        "Mesure":"elec",
+        "Descriptions":[{
+            "Description":"Bravo, vous avez parcouru 100km en Vélib électrique!",
+            "Seuil":100     
+        },
+        {
+            "Description":"Bravo, vous avez parcouru 500km en Vélib électrique!",
+            "Seuil":500   
+        },
+        {
+            "Description":"Bravo, vous avez parcouru 1000km en Vélib électrique!",
+            "Seuil":1000
+        }]
+    },
+
+    {
+        "Id":"meca",
+        "Titre":"Muscles d'acier",
+        "Pic":"mecanique.jpg",
+        "Mesure":"meca",
+        "Descriptions":
+        [{
+            "Description":"Bravo, vous avez parcouru 100km en Vélib mécanique!",
+            "Seuil":100
+        },{
+            "Description":"Bravo, vous avez parcouru 500km en Vélib mécanique!",
+            "Seuil":500
+        },{
+            "Description":"Bravo, vous avez parcouru 1000km en Vélib mécanique!",
+            "Seuil":1000
+        }]
+    },
+
+    {
+        "Id":"tdf",
+        "Titre":"Tour de France",
+        "Pic":"tdf.jpg",
+        "Mesure":"total",
+        "Descriptions":[{
+            "Description":"Bravo, vous avez effectué l'équivalent d'un tour de france (environ 3500 km)",
+            "Seuil":3500
+        }]},
+
+    {
+        "Id":"night",
+        "Titre":"Insomniaque",
+        "Pic":"insomniaque.jpg",
+        "Mesure":"nuit",
+        "Descriptions":
+        [{
+            "Description":"Vous avez parcouru 25km entre 2h et 6h du matin. Attention à ne pas conduire sous l'empire de l'alcool.",
+            "Seuil":25
+        },
+        {
+            "Description":"Vous avez parcouru 50km entre 2h et 6h du matin. Attention à ne pas conduire sous l'empire de l'alcool.",
+            "Seuil":50
+        },
+        {
+            "Description":"Vous avez parcouru 100km entre 2h et 6h du matin. Attention à ne pas conduire sous l'empire de l'alcool.",
+            "Seuil":100
+        }]},
+    
+    {
+        "Id":"matin",
+        "Titre":"Lève-tôt",
+        "Mesure":"matin",
+        "Pic":"matin.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez parcouru 25km entre 6h et 8h du matin. Le monde appartient à ceux qui se lèvent tôt !",
+            "Seuil":25
+        },{
+            "Description":"Vous avez parcouru 50km entre 6h et 8h du matin. Le monde appartient à ceux qui se lèvent tôt !",
+            "Seuil":50
+        },{
+            "Description":"Vous avez parcouru 100km entre 6h et 8h du matin. Le monde appartient à ceux qui se lèvent tôt !",
+            "Seuil":100
+        }]},
+    
+    {
+        "Id":"compter",
+        "Titre":"Attrapez les tous !",
+        "Pic":"pokemon.jpg",
+        "Mesure":"id",
+        "Descriptions":
+        [{
+            "Description":"Vous avez testé plus de 250 Vélibs différents ! Votre Vélibdex est bientôt plein... ",
+            "Seuil":250
+        },
+        {
+            "Description":"Vous avez testé plus de 500 Vélibs différents ! Votre Vélibdex est bientôt plein... ",
+            "Seuil":500
+        },
+        {
+            "Description":"Vous avez testé plus de 1000 Vélibs différents ! Votre Vélibdex est bientôt plein... ",
+            "Seuil":1000
+        }]
+
+    },
+    {
+        "Id":"vieuxCopains",
+        "Titre":"Vieux copains",
+        "Mesure":"maxDaysInterval",
+        "Pic":"vieux.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez utilisé le même Vélib à 31 jours d'intervalle. Quel drôle de hasard.",
+            "Seuil":31
+        }]
+    },
+    {
+        "Id":"velibirthday",
+        "Titre":"Joyeux Vélibersaire !",
+        "Pic":"velibirthday.jpg",
+        "Mesure":"old",
+        "Descriptions":
+        [{
+            "Description":"Cela fait un an depuis votre premier trajet Vélib. Ca se fête !",
+            "Seuil":1
+        },
+        {
+            "Description":"Cela fait deux ans depuis votre premier trajet Vélib. Ca se fête !",
+            "Seuil":2
+        },
+        {
+            "Description":"Cela fait cinq ans depuis votre premier trajet Vélib. Ca se fête !",
+            "Seuil":5
+        }]
+    },
+    {
+        "id":"dimanche",
+        "Titre":"Anti grasse matinée",
+        "Mesure":"dimanche",
+        "Pic":"grassemat.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez parcouru 25km le dimanche matin. Vous êtes sûr que tout va bien ?",
+            "Seuil":25
+        },{
+            "Description":"Vous avez parcouru 50km le dimanche matin. Vous êtes sûr que tout va bien ?",
+            "Seuil":50
+        },{
+            "Description":"Vous avez parcouru 100km le dimanche matin. Vous êtes sûr que tout va bien ?",
+            "Seuil":100
+        }]},
+
+    {
+        "Id":"stations",
+        "Titre":"Globe Trotter",
+        "Mesure":"station",
+        "Pic":"stations.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez utilisé 25 stations différentes (depuis Février 2020).",
+            "Seuil":25
+        },{
+            "Description":"Vous avez utilisé 50 stations différentes (depuis Février 2020).",
+            "Seuil":50
+        },{
+            "Description":"Vous avez utilisé 100 stations différentes (depuis Février 2020).",
+            "Seuil":100
+        }]},
+    {
+        "Id":"fidele",
+        "Titre":"Abonné Fidèle",
+        "Pic":"fidele.jpg",
+        "Mesure":"fidelity",
+        "Descriptions":
+        [{
+            "Description":"Vous avez fait du Vélib au moins une fois par jour pendant 31 jours consécutifs ! Votre fidélité est émouvante",
+            "Seuil":31
+        }]
+    },
+    {
+        "Id":"chance",
+        "Titre":"Veinard",
+        "Mesure":"chance",
+        "Pic":"chance.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez rendu votre Vélib dans les 30 dernières secondes avant de devoir payer un supplément.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"malchance",
+        "Titre":"Chat noir",
+        "Mesure":"malchance",
+        "Pic":"malchance.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez rendu votre Vélib dans les 30 première secondes après devoir payer un supplément.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"idiot",
+        "Titre":"Tête en l'air",
+        "Mesure":"idiot",
+        "Pic":"idiot.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez oublié de vérifier que votre trajet a bien été enregistré en posant votre Vélib. Ca vous a surement coûté bonbon.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"stratege",
+        "Titre":"Deep Blue",
+        "Mesure":"stratege",
+        "Pic":"stratege.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez échangé un Vélib mécanique contre un Vélib éléctrique pendant un trajet. Vous êtes un fin stratége.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"minuit",
+        "Titre":"Cendrillon",
+        "Mesure":"minuit",
+        "Pic":"minuit.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez fait 10 fois du Vélib sur les coups de minuit. Attention à ce que votre vélo ne se transforme pas en citrouille.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"anniv",
+        "Titre":"Happy Birthday !",
+        "Pic":"anniv.jpg",
+        "Mesure":"anniv",
+        "Descriptions":
+        [{
+            "Description":"Vous avez fait du Vélib le jour de votre anniversaire.",
+            "Seuil":1
+        }]
+    },
+    {
+        "Id":"nouvelAn",
+        "Titre":"Happy New Year !",
+        "Mesure":"newyear",
+        "Pic":"nouvelan.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez fait du vélib pendant le passage au nouvel an.",
+            "Seuil":1
+        }]
+    },
+    
+    {
+        "Id":"co2",
+        "Titre":"Un vélib de CO2",
+        "Mesure":"carbone",
+        "Pic":"ecolo.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez écnomisé plus de 20,6 kg de CO2 en faisant du Vélib, soit le poids d'un Vélib vert.",
+            "Seuil":20.6
+        }]
+    },
+    {
+        "Id":"soleil",
+        "Titre":"Romantique",
+        "Mesure":"soleil",
+        "Pic":"romantique.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez assistez à 10 coucher du soleil pendant un trajet Vélib. C'est très romantique.",
+            "Seuil":10
+        }]
+    },
+    {
+        "Id":"jour",
+        "Titre":"Un tour de Périph",
+        "Mesure":"totalDay",
+        "Pic":"perioh.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez parcouru plus de 35km en une journée, soit la distance d'un tour de périph. Attention quand même, c'est un peu dangereux.",
+            "Seuil":35
+        }]
+    },
+    {
+        "Id":"trip",
+        "Titre":"Une visite au chateau",
+        "Mesure":"totalTrip",
+        "Pic":"versailles.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez parcouru plus de 17km en un seul trajet, soit la distance entre Paris et le chateau de Versailles.",
+            "Seuil":17
+        }]
+    },
+    {
+        "Id":"habitude",
+        "Titre":"Habitué",
+        "Mesure":"trajet",
+        "Pic":"habits.jpg",
+        "Descriptions":
+        [{
+            "Description":"Vous avez emprunter le même trajet plus de 50 fois (depuis Février 2020).",
+            "Seuil":50
+        }]
+    }
+]
