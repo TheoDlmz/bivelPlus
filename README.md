@@ -22,5 +22,9 @@ Contient les fonctions en javascript qui ne sont pas des composantes visuels (ca
 Contient les fonctions pour communiquer avec les différentes API
 
 ### assets
-Contient les images et les json
+Contient les images
+
+### json
+Contient les fichier json
+
 
