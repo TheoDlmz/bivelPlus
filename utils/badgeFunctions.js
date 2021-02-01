@@ -1,7 +1,7 @@
 
-import {getStats} from '../rides_functions/stats'
-import {distribDistHour} from '../rides_functions/graphFunctions'
-import {getFavoriteStations, getFavoriteRoutes} from '../rides_functions/mapFunctions'
+import {getStats} from '../utils/stats'
+import {distribDistHour} from '../utils/graphFunctions'
+import {getFavoriteStations, getFavoriteRoutes} from '../utils/mapFunctions'
 
 // Nombre de trajets au coucher du soleil
 export function dawn(rides){

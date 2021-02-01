@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { threshold } from "react-native-color-matrix-image-filters";
 import {Polyline} from 'react-native-maps';
 
 

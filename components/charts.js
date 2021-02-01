@@ -5,7 +5,7 @@ import { StackedAreaChart , Grid, XAxis, YAxis, StackedBarChart, AreaChart, PieC
 import * as shape from 'd3-shape'
 
 import{ evolDist, distribDistHour, distribSpeed, distribDistDay, 
-    jourNuit, distribDistOneDay, distribDist} from '../rides_functions/graphFunctions' 
+    jourNuit, distribDistOneDay, distribDist} from '../utils/graphFunctions' 
 
 const { width, height } = Dimensions.get("window");
 
