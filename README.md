@@ -29,5 +29,6 @@ Contient les fichier json
 
 ## Avancée du nettoyage
 
-Fait : qrReader.js et profile.js
-Prochains : map.js et report.js (puis les userComponents)
+Fait : qrReader.js, report.js et profile.js
+
+Prochains : map.js  (puis les userComponents)
