@@ -3,10 +3,10 @@ Code de l'application Bivel Plus
 
 ## Structure de l'arbre
 
-### main_components
+### mainComponents
   Contient les principaux components de la pile : Profile, Map, QRReader, Report
 
-### user_components
+### userComponents
 Contient les components de l'utilisateur (badges, stats, etc)
 
 ### components
