@@ -5,8 +5,8 @@ import { Icon } from 'react-native-elements'
 import MapView, {Heatmap, Marker}  from 'react-native-maps';
 import * as Location from 'expo-location';
 
-import {fetchStations} from './api/getStations'
-import {getItemValue} from './api/storage'
+import {fetchStations} from '../api/getStations'
+import {getItemValue} from '../utils/storage'
 
 const interpolate = require('color-interpolate');
 

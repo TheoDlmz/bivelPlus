@@ -3,16 +3,16 @@ import * as React from 'react';
 import { Text, View, ScrollView, TouchableOpacity, TextInput,StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements'
 
-import {getItemValue} from './api/storage'
-import {deconnect} from './api/connect'
-import {connect} from './api/connect'
-import {popupMessage} from './utils/miscellaneous'
+import {getItemValue} from '../utils/storage'
+import {deconnect} from '../api/connect'
+import {connect} from '../api/connect'
+import {popupMessage} from '../utils/miscellaneous'
 
-import {ProfileButton, RideItem} from './components/profileComponents'
-import {getStats} from './rides_functions/stats'
+import {ProfileButton, RideItem} from '../components/profileComponents'
+import {getStats} from '../utils/stats'
 
-import {profileStyle, loginStyle} from './style/profileStyle'
-import {generalStyle} from './style/generalStyle'
+import {profileStyle, loginStyle} from '../style/profileStyle'
+import {generalStyle} from '../style/generalStyle'
 
 
 

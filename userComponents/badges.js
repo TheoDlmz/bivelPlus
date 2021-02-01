@@ -3,10 +3,10 @@ import { Text, View, StyleSheet, Dimensions, Image, StatusBar, ScrollView, Touch
 import MapView, { Circle } from 'react-native-maps';
 
 import {Loading} from './loading'
-import {getItemValue} from '../api/storage'
+import {getItemValue} from '../utils/storage'
 
-import {getStats} from '../rides_functions/stats'
-import {compute_badges, compute_events, compute_mesures, compute_voyages} from '../rides_functions/badgeFunctions'
+import {getStats} from '../utils/stats'
+import {compute_badges, compute_events, compute_mesures, compute_voyages} from '../utils/badgeFunctions'
 
 const { width, height } = Dimensions.get("window");
 

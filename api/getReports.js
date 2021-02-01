@@ -1,5 +1,5 @@
-import {success, failure} from './premises'
-import {getItemValue} from './storage'
+import {success, failure} from '../utils/premises'
+import {getItemValue} from '../utils/storage'
 
 
 export const fetchReports = async () => {

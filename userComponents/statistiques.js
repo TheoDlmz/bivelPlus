@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions,ScrollView, StatusBar} from 'react-native';
 
 import {Loading} from './loading'
-import {getItemValue} from '../api/storage'
+import {getItemValue} from '../utils/storage'
 
-import {getStats} from '../rides_functions/stats'
+import {getStats} from '../utils/stats'
 import {Night, Speed, DistOneDay, CumulDist,
-        DistRides,  HourDist,  DayDist, MonthDist} from './charts_panels'
+        DistRides,  HourDist,  DayDist, MonthDist} from '../components/charts'
 
 const { width, height } = Dimensions.get("window");
 

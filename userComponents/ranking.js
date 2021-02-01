@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, ScrollView, StatusBar, Dimensions} from 'react-
 import Toast from 'react-native-toast-message';
 
 import {Loading} from './loading'
-import {getItemValue} from '../api/storage'
+import {getItemValue} from '../utils/storage'
 import {fetchRanking} from '../api/getRankings'
 
 const { width, height } = Dimensions.get("window");

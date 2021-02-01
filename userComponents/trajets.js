@@ -4,11 +4,11 @@ import { Icon } from 'react-native-elements'
 import MapView from 'react-native-maps';
 
 import {Loading} from './loading'
-import {getItemValue} from '../api/storage'
-import {AnimatedPolyline} from '../component/map_comp'
+import {getItemValue} from '../utils/storage'
+import {AnimatedPolyline} from '../components/map_comp'
 
-import {dicoStations} from '../rides_functions/general'
-import {trajet} from '../rides_functions/mapFunctions'
+import {dicoStations} from '../utils/general'
+import {trajet} from '../utils/mapFunctions'
 
 const { width, height } = Dimensions.get("window");
 

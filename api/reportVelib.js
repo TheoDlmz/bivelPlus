@@ -1,4 +1,4 @@
-import {success, failure} from './premises'
+import {success, failure} from '../utils/premises'
 
 export const fileReport = async (bikeId, user, error, bivelId, closest) => {
         let bivel_id;
