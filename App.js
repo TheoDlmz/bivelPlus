@@ -22,7 +22,7 @@ const options = {
   }
 }
 const Stack = createStackNavigator();
-function App() {
+export default  function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -46,5 +46,3 @@ function App() {
     
   );
 };
-
-export default App;

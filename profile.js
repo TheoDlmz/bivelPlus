@@ -1,16 +1,19 @@
 
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, ScrollView, TouchableOpacity, TextInput,StatusBar } from 'react-native';
+import { Text, View, ScrollView, TouchableOpacity, TextInput,StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements'
-import Toast from 'react-native-toast-message';
 
 import {getItemValue} from './api/storage'
 import {deconnect} from './api/connect'
 import {connect} from './api/connect'
+import {popupMessage} from './utils/miscellaneous'
 
+import {ProfileButton, RideItem} from './components/profileComponents'
 import {getStats} from './rides_functions/stats'
 
-const { width, height } = Dimensions.get("window");
+import {profileStyle, loginStyle} from './style/profileStyle'
+import {generalStyle} from './style/generalStyle'
+
 
 
 export default class AccountView extends React.Component{
@@ -23,546 +26,255 @@ export default class AccountView extends React.Component{
         password:"",
     }
 
+    
+    componentDidMount() {
+        getItemValue("@last_update")
+            .then((res) => this.fetchData(res))
+            .catch(() => this.setState({logged:false}));
+        
+    }
+
     loadData(){
-        getItemValue("@rides_infos").then((res) => this.setState({ridesInfos:JSON.parse(res)}))
-        .catch((err) => this.setState({logged:false}));   
-        getItemValue("@user_infos").then((res) => this.setState({userInfos:JSON.parse(res)}))
-        .catch((err) => this.setState({logged:false}));   
+        getItemValue("@rides_infos")
+            .then((res) => this.setState({ridesInfos:JSON.parse(res)}))
+            .catch(() => this.setState({logged:false}));   
+        getItemValue("@user_infos")
+            .then((res) => this.setState({userInfos:JSON.parse(res)}))
+            .catch(() => this.setState({logged:false}));   
 
     }
 
-    backToLogin(){
-        this.props.navigation.reset({
-            index: 0,
-            routes: [{ name: 'Login' }],
-          });
-    }
 
-
+    // Mets à jour les données au lancement de la vue si besoin
     async fetchData(last_update){
 
         let d = new Date();
         let curr_date = d.toDateString();
+
         if (last_update == undefined){
-           this.backToLogin();
+           this.setState({logged:false})
            return
         }
-        if (curr_date != last_update){
-            let email = await getItemValue("@username");
-            let password = await getItemValue("@password");
-            connect(email, password, true).then(async (res) => {
-                Toast.show({
-                    type: 'success',
-                    position: 'top',
-                    text1: 'Infos Updated',
-                    visibilityTime: 4000,
-                    autoHide: true,
-                    topOffset: 30,
-                    bottomOffset: 40
-                  });
-              })
-              .catch((err) => Toast.show({
-                type: 'error',
-                position: 'top',
-                text1: 'Failed to update your data',
-                text2: err.message,
-                visibilityTime: 4000,
-                autoHide: true,
-                topOffset: 30,
-                bottomOffset: 40
-              })
-              
-              );
-        }
-    }
 
-    componentDidMount() {
-        getItemValue("@last_update").then((res) => this.fetchData(res)).catch((res) =>
-        this.backToLogin());
+        if (curr_date != last_update){
+            this.updateData();
+        }
+
         this.loadData();
     }
 
-
+    
+    // Mise à jour des données
     async updateData(){
-        Toast.show({
-            type: 'info',
-            position: 'top',
-            text1: 'Téléchargement des données en cours',
-            text2: 'Cela devrait prendre quelques secondes',
-            visibilityTime: 4000,
-            autoHide: true,
-            topOffset: 30,
-            bottomOffset: 40
-          });
+        popupMessage('info', 'Téléchargement des données', 'Cela devrait prendre quelques secondes');
         let email = await getItemValue("@username");
         let password = await getItemValue("@password");
-        connect(email, password, true).then(async (res) => {
-            Toast.show({
-                type: 'success',
-                position: 'top',
-                text1: 'Infos Updated',
-                visibilityTime: 4000,
-                autoHide: true,
-                topOffset: 30,
-                bottomOffset: 40
-              });
-              
-            this.loadData();
-          })
-          .catch((err) => Toast.show({
-            type: 'error',
-            position: 'top',
-            text1: 'Failed to update Infos',
-            text2: err.message,
-            visibilityTime: 4000,
-            autoHide: true,
-            topOffset: 30,
-            bottomOffset: 40
-          })
-          
-          );
+        connect(email, password, true)
+            .then(async () => {
+                popupMessage('success', 'Infos mises à jour', 'Vos informations sont à jour');
+                this.loadData();
+            })
+            .catch((err) => 
+                popupMessage('error', 'Echec de mise à jour', err.message)
+            );
 
     }
 
+    // Déconnecte l'utilisateur
     deconnectUser(){
-        deconnect().then((res) => {
-            Toast.show({
-            type: 'success',
-            position: 'top',
-            text1: 'Successfully deconnected',
-            visibilityTime: 4000,
-            autoHide: true,
-            topOffset: 30,
-            bottomOffset: 40
-          });
-          this.setState({logged:false})
-          console.log("deconnected")
-        
-        })
-      .catch((err) => Toast.show({
-        type: 'error',
-        position: 'top',
-        text1: 'Failed to deconnect',
-        text2: err.message,
-        visibilityTime: 4000,
-        autoHide: true,
-        topOffset: 30,
-        bottomOffset: 40
-      })
-      
-      );
+        deconnect()
+            .then(() => {
+                popupMessage('success', 'Déconnexion réussie', "Vous êtes déconnecté");
+                this.setState({logged:false})
+            })
+            .catch((err) => 
+                popupMessage('error', 'Echec lors de la déconnexion', err.message)
+            );
+        }
 
-
-    }
-
+    // Connecte l'utilisateur
     connectUser =  async () => {
-        Toast.show({
-            type: 'info',
-            position: 'top',
-            text1: 'Connexion en cours',
-            text2: 'Cela devrait prendre quelques secondes',
-            visibilityTime: 4000,
-            autoHide: true,
-            topOffset: 30,
-            bottomOffset: 40
-          });
+        popupMessage('info', 'Connexion en cours', 'Cela devrait prendre quelques secondes')
         connect(this.state.email,this.state.password, true)
-          .then(async (res) => {
-            Toast.show({
-                type: 'success',
-                position: 'top',
-                text1: 'Connecté avec succès',
-                visibilityTime: 4000,
-                autoHide: true,
-                topOffset: 30,
-                bottomOffset: 40
-              });
-              this.setState({logged:true})
+            .then(async () => {
+                popupMessage('success', 'Connexion réussie', 'Vous êtes désormais connecté');
+                this.setState({logged:true});
                 this.loadData();
           })
-          .catch((err) => Toast.show({
-            type: 'error',
-            position: 'top',
-            text1: 'Erreur lors de la connection',
-            text2: err.message,
-            visibilityTime: 4000,
-            autoHide: true,
-            topOffset: 30,
-            bottomOffset: 40
-          })
-          
+          .catch((err) => 
+            popupMessage('error', 'Connexion échouée', err.message)          
           );
       }
-
-    RideItem(params){
-
-        let color = "#d0f086";
-        let elec = params.r.elec;
-        let date = new Date(params.r.date);
-        if (params.r.dist < 100){
-            color = "#dea38a";
-        }else if(elec){
-            color = "#8ac6de";
-        }
-        let timefin = new Date(date.getTime()+ params.r.duration*1000);
-    
-        return (
-            <View style={[styles.rideBloc,{backgroundColor:color}]} >
-                <View
-                    style={[styles.rideSubBloc,{justifyContent:'space-between',padding:0}]}
-                >
-                    <View style={styles.rideSubBloc}>
-                        <Icon name='calendar'
-                            type='material-community'
-                            style={{marginRight:5}}
-                            size={20} />
-                        <Text>
-                            {date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()}
-                        </Text>
-                    </View>
-                    {params.r.elec &&
-                        <Icon name='flash'
-                            type='material-community'
-                            style={{paddingTop:2}}
-                            size={20} />
-                    }
-                </View>
-                <View style={styles.rideSubBloc}>
-                    <Icon name='clock'
-                        type='material-community'
-                        style={{marginRight:5}}
-                        size={20} />
-                    <Text>
-                        {String(date.getHours()).padStart(2, "0")
-                        +'h'
-                        +String(date.getMinutes()).padStart(2, "0") 
-                        + " - "
-                        + String(timefin.getHours()).padStart(2, "0")
-                        +'h'
-                        + String(timefin.getMinutes()).padStart(2, "0") 
-                        }
-                    </Text>
-                </View>
-                <View style={styles.rideSubBloc}>
-                    <Icon name='bike'
-                        type='material-community'
-                        style={{marginRight:5}}
-                        size={20} />
-                    <Text>
-                        {params.r.dist/1000 + " km"}
-                    </Text>
-                </View>
-            </View>
-        )
-    }
 
 
 
     render() {
 
-
+        /*
+            Si l'utilisateur n'est pas connecté, on lui présente un tableau de connexion
+        */
 
         if (!this.state.logged){
-
-            return <View style={styles.containerLogin}>
-                    <TextInput
-                    style={styles.input}
-                    placeholder="email adress"
-                    keyboardType="email-address"
-                    autoCapitalize = 'none'
-                    onChangeText={(text) => this.setState({email:text})}
-                    value={this.state.email}
-                />
-                    <TextInput
-                    style={styles.input}
-                    placeholder="password"
-                    autoCapitalize = 'none'
-                    secureTextEntry={true}
-                    maxLength={20}
-                    onChangeText={(text) => this.setState({password:text})}
-                    value={this.state.password}
-                    />
-                    <TouchableOpacity
-                        onPress={() => this.connectUser()}
-                        style={styles.buttonLogin}
-                    >
-                    <Text style={styles.buttonText}>
-                        Se connecter</Text>
+            return (
+                <View style={loginStyle.containerLogin}>
+                    <View style={generalStyle.topView}>
+                        <Text style={generalStyle.title}>Se connecter</Text>
+                    </View>
+                    <View style={loginStyle.loginBox}>
+                        <TextInput
+                            style={loginStyle.input}
+                            placeholder="email adress"
+                            keyboardType="email-address"
+                            autoCapitalize = 'none'
+                            onChangeText={(text) => this.setState({email:text})}
+                            value={this.state.email}
+                        />
+                        <TextInput
+                            style={loginStyle.input}
+                            placeholder="password"
+                            autoCapitalize = 'none'
+                            secureTextEntry={true}
+                            maxLength={20}
+                            onChangeText={(text) => this.setState({password:text})}
+                            value={this.state.password}
+                        />
+                        <TouchableOpacity
+                            onPress={() => this.connectUser()}
+                            style={loginStyle.buttonLogin}
+                        >
+                            <Text style={loginStyle.buttonText}>
+                                Se connecter
+                            </Text>
                         </TouchableOpacity>
-       
-          </View>
-
-
+                    </View>
+                </View>)
         }
-        let name;
-        let score;
+
+        /*
+            Sinon, on affiche son profil. Il est divisé en trois parties :
+                * La TopView avec les icones pour la carte, la mise à jour et le pseudo
+                * Les 20 derniers trajets de l'utilisateurs
+                * Les boutons pour accéder aux autres composants
+        */
+       
+       let loaded = this.state.userInfos && this.state.ridesInfos;
+
+        let name = "Loading...";
+        let score = "Loading...";
         let n = 0;
         let indexs = [];
-        let rides;
-        if (this.state.userInfos == undefined || this.state.ridesInfos == undefined){
-            name = "Loading...";
-            score = "Loading...";
-        }else{
+
+        let rides = this.state.ridesInfos;
+        if (loaded){
             name = this.state.userInfos['generalDetails']['customerDetails']['name']['firstName']
                 + " "
                 + this.state.userInfos['generalDetails']['customerDetails']['name']['lastName'][0] +".";
 
-            rides = this.state.ridesInfos;
             let infosDists = getStats(rides);
             score = Math.round(infosDists.total)+ " km";
-            
             n = Math.min(20,rides.length);
-
-            indexs = [...Array(n).keys()];;
+            indexs = [...Array(n).keys()];
         }
 
-        return <View style={styles.container}>
-        <StatusBar hidden={true} />
-            <View style={styles.topView}>
-            <View style={styles.topLeft}>
-                <TouchableOpacity
-                underlayColor=""
-                  onPress={() =>
-                    this.props.navigation.navigate ('Map')} >
-                <Icon name='map' 
-                        type='material-community'
-                        color="#d8deeb" 
-                        size={42}  />
-                  
-                  </TouchableOpacity>
-                  <Text style={styles.mapText}>
-                  Map
-                </Text>
+        return (
+        <View style={generalStyle.container}>
+            <StatusBar hidden={true}/>
+
+
+            <View style={profileStyle.topView}>
+                <View style={profileStyle.sideTopView}>
+                    <TouchableOpacity
+                        underlayColor=""
+                        onPress={() => this.props.navigation.navigate ('Map')}
+                    >
+                        <Icon 
+                            name='map' 
+                            type='material-community'
+                            color="#d8deeb" 
+                            size={42}  
+                        />
+                    </TouchableOpacity>
+                    <Text style={profileStyle.sideTopText}>
+                        Map
+                    </Text>
                 </View>
-                <View style={styles.middleTop}>
-                  
-                    <Text style={styles.pseudo}>{name}</Text>
-                  <Text style={{letterSpacing:2, color:"#d8deeb"}}>{score}</Text>
+                <View style={profileStyle.middleTopView}>
+                    <Text style={profileStyle.pseudoText}>
+                        {name}
+                    </Text>
+                  <Text style={profileStyle.scoreText}>
+                      {score}
+                    </Text>
                 </View>
-                <View
-                style={styles.rightTop}>
-                  <TouchableOpacity
-                onPress={() => this.updateData()}
-                underlayColor="" >
-                <Icon name='update' 
-                        type='material-community'
-                        color="#d8deeb" 
-                        size={42}  />
+                <View style={profileStyle.sideTopView}>
+                    <TouchableOpacity
+                        onPress={() => this.updateData()}
+                        underlayColor=""
+                    >
+                        <Icon 
+                            name='update' 
+                            type='material-community'
+                            color="#d8deeb" 
+                            size={42}  
+                        />
                   </TouchableOpacity>
-                <Text style={styles.updateText}>
-                    Update
-                </Text>
+                    <Text style={profileStyle.sideTopText}>
+                        Update
+                    </Text>
+                </View>
             </View>
 
-            </View>
+
 
             <ScrollView
-                    style={styles.lastRides}
-                    snapToInterval={160}
-                    horizontal>
-                        {indexs.map(index => this.RideItem({r:rides[index]}))}
+                style={profileStyle.lastRides}
+                snapToInterval={160}
+                horizontal
+            >
+                {indexs.map(index => <RideItem params={rides[index]}/>)}
             </ScrollView>
-            <View style={styles.buttonView}>
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('Rides')} >
-                    <Icon name='bike' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Trajets</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('MapRides')} >
-                    <Icon name='map-marker-circle' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Carte</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('Stats')} >
-                    <Icon name='finance' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Statistiques</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('Badges')} >
-                <Icon name='star-circle' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Badges</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('UserReports')} >
-                <Icon name='alert-circle' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Signalement</Text>
-                </TouchableOpacity>
-               
-                <TouchableOpacity style={styles.oneButton}
-                  onPress={() =>
-                    this.props.navigation.navigate ('Ranking')} >
-                <Icon name='podium' 
-                        type='material-community'
-                        color="white" 
-                        size={45} />
-                    <Text style={styles.textButton}>Classement</Text>
-                </TouchableOpacity>
+
+
+            <View style={profileStyle.buttonView}>
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('Rides')}
+                     icon="bike"
+                     title="Trajets"
+                />
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('MapRides')}
+                     icon="map-marker-circle"
+                     title="Carte"
+                />
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('Stats')}
+                     icon="finance"
+                     title="Statistiques"
+                />
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('Badges')}
+                     icon="star-circle"
+                     title="Badges"
+                />
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('UserReports')}
+                     icon="alert-circle"
+                     title="Signalements"
+                />
+                <ProfileButton
+                     onPress={() => this.props.navigation.navigate ('Ranking')}
+                     icon="podium"
+                     title="Classement"
+                />
             </View>
-                <TouchableOpacity style={styles.logOutButton}
-                onPress={() => this.deconnectUser()}>
-                    <Text style={styles.textButton}>Deconnexion</Text>
-                </TouchableOpacity>
-        </View>
-
+            <TouchableOpacity 
+                style={profileStyle.logOutButton}
+                onPress={() => this.deconnectUser()}
+            >
+                <Text style={profileStyle.textButton}>
+                    Deconnexion
+                </Text>
+            </TouchableOpacity>
+        </View>)
     }
-
-
-
-
 }
-
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems:"center",
-        backgroundColor:"rgb(40, 62, 105)"
-    },
-    topView:{
-        height:80,
-        backgroundColor:"rgb(25, 41, 71)",
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center",
-        paddingRight:5,
-        paddingLeft:5,
-        alignSelf:"stretch",
-    },
-    middleTop:{
-        alignItems:"center",
-        justifyContent:"center"
-      },
-      rightTop:{
-        width:60,
-        alignItems:"center",
-        justifyContent:"center"
-  
-      },
-      mapText:{
-        marginTop:-4,
-        fontWeight:"bold",
-        color:'#d8deeb'
-      },
-      updateText:{
-        marginTop:-4,
-        fontWeight:"bold",
-        color:'#d8deeb'
-      },
-      topLeft:{
-      width:60,
-      alignItems:"center",
-      justifyContent:"center"
-    },
-    pseudo:{
-        fontSize:30,
-        fontWeight:'700',
-        color:"#d8deeb"
-    
-    },
-    lastRides:{
-        flexDirection:'row',
-        margin:5,
-        marginTop:10,
-        flex:1
-    },
-    rideBloc:{
-        width:150,
-        margin:5,
-        alignItems:"stretch"
-    },
-    rideSubBloc:{
-        flexDirection:'row',
-        padding:5,
-    },
-    
-    divider:{
-        marginTop:10,
-        marginBottom:10,
-        backgroundColor:"#FFF",
-        height:3,
-        width:width-30
-    },
-    buttonView:{
-        flex:3.8,
-        margin:5,
-        flexWrap:'wrap',
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignItems:"center"
-    },
-    oneButton:{
-        width:0.45*width,
-        height:0.16*height,
-        backgroundColor:"rgb(25, 41, 71)",
-        margin:5,
-        alignItems:"center",
-        justifyContent:"center"
-    },
-    logOutButton:{
-        position:"absolute",
-        bottom:0,
-        width:width,
-        padding:10,
-        backgroundColor:"rgb(209, 68, 52)",
-        alignItems:"center",
-        justifyContent:"center"
-    },
-    textButton:{
-        fontSize:17,
-        color:"white",
-        fontWeight:"bold"
-    }, 
-    containerLogin:{
-        flex: 1, 
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        backgroundColor:'rgb(29, 32, 59)',
-         padding:40, 
-       paddingTop:120,
-
-
-     },
-    input: {
-        backgroundColor:'#dae4f5',
-        fontSize:18,
-        padding:10,
-        marginBottom:10,
-        borderRadius:50,
-        paddingLeft:20,
-        paddingRight:20
-        
-      },
-      buttonLogin:{
-        backgroundColor:'#eb801c',
-        padding:8,
-        marginTop:20,
-        paddingLeft:20,
-        paddingRight:20,
-        alignItems:"center",
-      },buttonText:{
-        color:'white',
-        fontSize:19,
-        fontWeight:'bold'
-      },
-})
