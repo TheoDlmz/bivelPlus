@@ -1,7 +1,7 @@
-import {removeItemValue, setItemValue} from './storage'
-import {getRides, getPayments} from '../rides_functions/general'
-import {getStats} from '../rides_functions/stats'
-import {success, failure} from './premises'
+import {removeItemValue, setItemValue} from '../utils/storage'
+import {getRides, getPayments} from '../utils/general'
+import {getStats} from '../utils/stats'
+import {success, failure} from '../utils/premises'
 
 export const connect = async (email, password, save) => {
     try{

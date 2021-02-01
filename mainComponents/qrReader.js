@@ -3,15 +3,15 @@ import { Text, View, StyleSheet, TextInput, Dimensions, TouchableOpacity, Status
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Location from 'expo-location';
 
-import {getItemValue} from './api/storage';
+import {getItemValue} from '../utils/storage';
 
-import {dicoStations} from './rides_functions/general';
-import {closest_station} from './rides_functions/mapFunctions'
+import {dicoStations} from '../utils/general';
+import {closest_station} from '../utils/mapFunctions'
 
-import {sleep, popupMessage} from './utils/miscellaneous'
+import {sleep, popupMessage} from '../utils/miscellaneous'
 
-import {qrReaderStyle} from './style/reportStyle'
-import {generalStyle} from './style/generalStyle'
+import {qrReaderStyle} from '../style/reportStyle'
+import {generalStyle} from '../style/generalStyle'
 
 const { width, height } = Dimensions.get("window");
 

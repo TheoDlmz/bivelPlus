@@ -2,16 +2,16 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import MapScreen from './map'
-import SignalScreen from './report'
-import QRScreen from './qr_reader'
-import AccountView from './profile'
-import StatsView from './panels/statistiques'
-import MapRidesView from './panels/map'
-import RidesView from './panels/trajets'
-import BadgesView from './panels/badges'
-import RankingView from './panels/ranking'
-import UserReportsView from './panels/reports'
+import MapScreen from './mainComponents/map'
+import SignalScreen from './mainComponents/report'
+import QRScreen from './mainComponents/qrReader'
+import AccountView from './mainComponents/profile'
+import StatsView from './userComponents/statistiques'
+import MapRidesView from './userComponents/mapRides'
+import RidesView from './userComponents/trajets'
+import BadgesView from './userComponents/badges'
+import RankingView from './userComponents/ranking'
+import UserReportsView from './userComponents/reports'
 import Toast from 'react-native-toast-message';
 
 

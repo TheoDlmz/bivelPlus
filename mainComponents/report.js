@@ -2,8 +2,8 @@ import * as React from 'react';
 import { View, StyleSheet, Dimensions, Text, Image, TouchableOpacity, StatusBar, ScrollView} from "react-native";
 import { Icon } from 'react-native-elements';
 
-import {fileReport} from './api/reportVelib';
-import {getItemValue} from './api/storage';
+import {fileReport} from '../api/reportVelib';
+import {getItemValue} from '../utils/storage';
 
 const { width, height } = Dimensions.get("window");
 

@@ -4,11 +4,11 @@ import { Icon } from 'react-native-elements'
 import MapView from 'react-native-maps';
 
 import {Loading} from './loading'
-import {getItemValue} from '../api/storage'
+import {getItemValue} from '../utils/storage'
 
-import {dicoStations} from '../rides_functions/general'
+import {dicoStations} from '../utils/general'
 import {getFavoriteStations, getAllDays, getRidesOfDay,
-  lineRidesDay, HeatmapStations, old_home} from '../rides_functions/mapFunctions'
+  lineRidesDay, HeatmapStations, old_home} from '../utils/mapFunctions'
 
 const { width, height } = Dimensions.get("window");
 
