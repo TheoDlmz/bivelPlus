@@ -36,9 +36,8 @@ export default class QRScreen extends React.Component{
 
     handleIdEntered = () => {
         let idVelib = this.state.idVelib;
-        this.setState({idVelib:undefined});
+        this.setState({idVelib:""});
         this.props.navigation.navigate('Report',{bikeId:idVelib, from:'Map'});
-
     }
     handleBarCodeScanned = ({ type, data }) => {
 
@@ -83,13 +82,13 @@ export default class QRScreen extends React.Component{
 
 
         if (this.state.permission == undefined){
-            return <View style={generalStyle.container}>
+            return <View style={generalStyle.container,generalStyle.center}>
                 <Text style={qrReaderStyle.errorMessage}>
                     Accorder permission caméra
                 </Text>
             </View>
         }else if (this.state.permission == false){
-            return <View style={generalStyle.container}>
+            return <View style={generalStyle.container,generalStyle.center}>
                 <Text style={qrReaderStyle.errorMessage}>
                     Pas d'accès caméra
                 </Text>
@@ -97,7 +96,7 @@ export default class QRScreen extends React.Component{
         }
 
         return (
-            <View style={[generalStyle.container,{justifyContent:"center"}]}>
+            <View style={[generalStyle.container,generalStyle.center]}>
                 <StatusBar hidden={true} />
                 <BarCodeScanner
                     onBarCodeScanned={this.state.scanned ? undefined : this.handleBarCodeScanned}

@@ -2,7 +2,7 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

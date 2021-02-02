@@ -182,7 +182,7 @@ export default class AccountView extends React.Component{
 
 
             <View style={profileStyle.topView}>
-                <View style={profileStyle.sideTopView}>
+                <View style={generalStyle.sideTopView}>
                     <TouchableOpacity
                         underlayColor=""
                         onPress={() => this.props.navigation.navigate ('Map')}
@@ -198,7 +198,7 @@ export default class AccountView extends React.Component{
                         Map
                     </Text>
                 </View>
-                <View style={profileStyle.middleTopView}>
+                <View style={generalStyle.center}>
                     <Text style={profileStyle.pseudoText}>
                         {name}
                     </Text>
@@ -206,7 +206,7 @@ export default class AccountView extends React.Component{
                       {score}
                     </Text>
                 </View>
-                <View style={profileStyle.sideTopView}>
+                <View style={generalStyle.sideTopView}>
                     <TouchableOpacity
                         onPress={() => this.updateData()}
                         underlayColor=""

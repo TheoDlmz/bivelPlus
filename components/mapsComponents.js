@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import {Polyline} from 'react-native-maps';
+import { View,  Text } from "react-native";
+import {Polyline, Marker} from 'react-native-maps';
+import {sleep} from '../utils/miscellaneous'
 
+import {mapStyle} from '../style/mapStyle'
 
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+const interpolate = require('color-interpolate');
 
-  
-
+// Pour afficher les trajets animés
 export class AnimatedPolyline extends Component {
   constructor(props) {
     super(props);
@@ -70,4 +70,45 @@ export class AnimatedPolyline extends Component {
       />
     );
   }
+}
+
+export class MarkerStation extends Component {
+
+  state = {
+    station: this.props.station
+  }
+
+  render() {
+    let station = this.state.station;
+    let lat = station.geo[0];
+    let lon = station.geo[1];
+
+    let colormap = interpolate(['red', 'orange', 'green']);
+    let w = Math.min(1, (station.ebike + station.meca) / 20)
+    let color = colormap(w);
+    return (<Marker
+      coordinate={{
+        latitude: lat,
+        longitude: lon,
+      }}
+      key={station.id_bivel}
+      tracksViewChanges={false}
+      anchor={{ x: .5, y: .5 }}
+      onPress={this.props.onPress}
+    >
+      <View
+        style={[mapStyle.markerView, { backgroundColor: color }]}
+      >
+        <Text style={{ color: "white" }}>
+          {station.meca + '|' + station.ebike}
+        </Text>
+      </View>
+    </Marker>)
+  }
+}
+export const parisCoord = {
+  latitude: 48.864716,
+  longitude: 2.349014,
+  latitudeDelta: 0.15,
+  longitudeDelta: 0.15,
 }

@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 export const generalStyle = StyleSheet.create({
     container:{
         flex:1,
-        alignItems:"center",
         backgroundColor:"rgb(40, 62, 105)"
     },
     topView:{
@@ -18,5 +17,14 @@ export const generalStyle = StyleSheet.create({
         fontSize:30,
         fontWeight:'700',
         color:"#d8deeb"
-    }
+    },
+    sideTopView:{
+        width:60,
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    center:{
+        alignItems:"center",
+        justifyContent:"center"
+    },
 })

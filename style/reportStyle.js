@@ -63,6 +63,10 @@ export const reportStyle = StyleSheet.create({
     reportMessage: {
         alignItems: "center",
     },
+    reportMessageText:{ 
+        fontSize: 25,
+         color:"#eee" 
+    },
     displayMessage: {
         alignItems: "stretch",
         justifyContent: "center",
@@ -95,7 +99,6 @@ export const reportStyle = StyleSheet.create({
     titleReport: {
         fontWeight: 'bold',
         fontSize: 20
-
     },
     imageError: {
         width: (height / 4 - 40) * 0.7,

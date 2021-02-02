@@ -3,7 +3,7 @@ import {Heatmap, Marker, Polyline} from 'react-native-maps';
 import {View} from 'react-native';
 import * as React from 'react';
 import { Icon } from 'react-native-elements'
-import {AnimatedPolyline} from '../components/map_comp'
+import {AnimatedPolyline} from '../components/mapsComponents'
 
 export function getFavoriteStations(rides){
 	var dico_s = {};
