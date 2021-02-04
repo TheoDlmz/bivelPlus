@@ -22,9 +22,12 @@ export default class RidesView extends React.Component {
     };
 
     componentDidMount() {
-        getItemValue("@rides_infos").then((res) => this.setState({ ridesInfos: JSON.parse(res) }));
-        getItemValue("@stations_infos").then((res) => this.setState({ stations: dicoStations(JSON.parse(res)) }));
-
+        getItemValue("@rides_infos")
+            .then((res) => this.setState({ ridesInfos: JSON.parse(res) }))
+            .catch();
+        getItemValue("@stations_infos")
+            .then((res) => this.setState({ stations: dicoStations(JSON.parse(res)) }))
+            .catch();
     }
     
     render() {
@@ -39,6 +42,7 @@ export default class RidesView extends React.Component {
         for (let i = 0; i < n; i++) {
             rides[i]['id'] = "ride_" + i
         }
+
         return (
             <View style={generalStyle.container}>
                 <StatusBar hidden={true} />
@@ -54,8 +58,8 @@ export default class RidesView extends React.Component {
                             origin:stations[item.item.stationStart][0],
                             dest:stations[item.item.stationEnd][0]
                         }}
-                        onPressReport={() => this.props.navigation.navigate('Report', { bikeId: r.bikeId, from: 'Home' })}
-                        onPressSee={() => this.setState({ mapSelected: r })}
+                        onPressReport={() => this.props.navigation.navigate('Report', { bikeId: item.item.bikeId, from: 'Home' })}
+                        onPressSee={() => this.setState({ mapSelected: item.item })}
                         />)}
                     keyExtractor={item => item.id}
                 />

@@ -2,6 +2,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get("window");
+
 export const qrReaderStyle = StyleSheet.create({
     decoCamera:{
         width:250,
@@ -53,7 +54,6 @@ export const qrReaderStyle = StyleSheet.create({
 
     }
 });
-
 
 export const reportStyle = StyleSheet.create({
     containerBoxes: {
@@ -165,7 +165,6 @@ export const userReportStyle = StyleSheet.create({
     }
 
 })
-
 
 export const reportItemStyle = StyleSheet.create({
     reportItem: {

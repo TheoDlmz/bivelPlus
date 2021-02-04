@@ -1,5 +1,8 @@
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get("window");
+
 
 export const generalStyle = StyleSheet.create({
     container:{
@@ -27,4 +30,23 @@ export const generalStyle = StyleSheet.create({
         alignItems:"center",
         justifyContent:"center"
     },
+    fullWidth:{
+        width: width 
+    },
+    bottomView: {
+        position: "absolute",
+        bottom: 0,
+        paddingBottom: 10,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        alignSelf:"center"
+    },
+    bottomDot: {
+        width: 10,
+        height: 10,
+        borderRadius: 10,
+        margin: 5
+    },
+
 })
