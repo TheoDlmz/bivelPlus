@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, ScrollView, StatusBar, Dimensions} from 'react-native';
 import Toast from 'react-native-toast-message';
 
-import {Loading} from './loading'
+import {Loading} from '../components/loading'
 import {getItemValue} from '../utils/storage'
 import {fetchRanking} from '../api/getRankings'
 

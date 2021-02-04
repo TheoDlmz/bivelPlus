@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions, Image, StatusBar, ScrollView, TouchableHighlight} from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 
-import {Loading} from './loading'
+import {Loading} from '../components/loading'
 import {getItemValue} from '../utils/storage'
 
 import {getStats} from '../utils/stats'

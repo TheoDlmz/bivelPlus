@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
-import { AnimatedPolyline } from '../components/mapsComponents'
+import { AnimatedPolyline } from './mapsComponents'
 import { Icon } from 'react-native-elements'
 
 import {trajet} from '../utils/mapFunctions'

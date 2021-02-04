@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, Dimensions, TouchableOpacity, StatusBar } from 'react-native';
+import { Text, View, ActivityIndicator, TextInput, Dimensions, TouchableOpacity, StatusBar } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as Location from 'expo-location';
 
@@ -22,7 +22,7 @@ export default class QRScreen extends React.Component{
         scanned:false,
         idVelib:"",
         user_pos:undefined,
-        stations:undefined
+        stations:undefined,
     }
 
     componentDidMount() {
@@ -34,10 +34,30 @@ export default class QRScreen extends React.Component{
             .catch();
     }
 
+    goToReport(idVelib){
+        
+        this.setState({idVelib:""});
+        Location.getCurrentPositionAsync({})
+            .then((location) => { 
+                let user_pos = {
+                latitude:location.coords.latitude,
+                longitude:location.coords.longitude};
+                let stations = this.state.stations;
+                let closest = closest_station(user_pos, stations)[0];
+                this.props.navigation.navigate('Report',{bikeId:idVelib,closest:closest, from:'Map'});
+                this.setState({scanned:false});
+                })
+            .catch(() => {
+                this.props.navigation.navigate('Report',{bikeId:idVelib,closest:undefined, from:'Map'});
+                this.setState({scanned:false});
+            });
+
+    }
+
     handleIdEntered = () => {
         let idVelib = this.state.idVelib;
-        this.setState({idVelib:""});
-        this.props.navigation.navigate('Report',{bikeId:idVelib, from:'Map'});
+        this.setState({scanned:true});
+        this.goToReport(idVelib);
     }
     handleBarCodeScanned = ({ type, data }) => {
 
@@ -49,7 +69,6 @@ export default class QRScreen extends React.Component{
         }
         let string_qr = "http://qrcodes.smoove.pro/qrcode/FP_"
         let string_qr_sub = "http://qrcodes.smoove.pro/"
-
         sleep(3000).then(() => this.setState({scanned:false}));
         
         // On teste si c'est une bon lien
@@ -63,18 +82,8 @@ export default class QRScreen extends React.Component{
         }
 
         let qr = data.substring(string_qr.length,string_qr.length+5);
-        Location.getCurrentPositionAsync({})
-            .then((location) => { 
-                let user_pos = {
-                latitude:location.coords.latitude,
-                longitude:location.coords.longitude};
-                let stations = this.state.stations;
-                let closest = closest_station(user_pos, stations)[0];
-                this.props.navigation.navigate('Report',{bikeId:parseInt(qr),closest:closest});
-                })
-            .catch(() => {
-                this.props.navigation.navigate('Report',{bikeId:parseInt(qr),closest:undefined});
-            });
+        let idVelib = parseInt(qr);
+        this.goToReport(idVelib);
     };
     
 
@@ -82,13 +91,13 @@ export default class QRScreen extends React.Component{
 
 
         if (this.state.permission == undefined){
-            return <View style={generalStyle.container,generalStyle.center}>
+            return <View style={[generalStyle.container,generalStyle.center]}>
                 <Text style={qrReaderStyle.errorMessage}>
                     Accorder permission caméra
                 </Text>
             </View>
         }else if (this.state.permission == false){
-            return <View style={generalStyle.container,generalStyle.center}>
+            return <View style={[generalStyle.container,generalStyle.center]}>
                 <Text style={qrReaderStyle.errorMessage}>
                     Pas d'accès caméra
                 </Text>
@@ -106,7 +115,14 @@ export default class QRScreen extends React.Component{
                     <Text style={qrReaderStyle.textScanQR}>Scannez le QR Code</Text>
                 </View>
                 {this.state.idVelib.length < 4 &&
-                    <View style={qrReaderStyle.decoCamera}/>
+                    <View style={qrReaderStyle.decoCamera}>
+                    {this.state.scanned &&
+                        <ActivityIndicator
+                            animating = {true}
+                            color = 'white'
+                            size = "large"/>
+                    }
+                    </View>
                 }
                 {this.state.idVelib.length >= 4 &&
                 <TouchableOpacity 
@@ -118,6 +134,7 @@ export default class QRScreen extends React.Component{
                     </Text>
                 </TouchableOpacity>
                 }
+               
                 <TextInput
                     style={qrReaderStyle.inputId}
                     placeholder={"Ou entrez l'ID du Vélib"}

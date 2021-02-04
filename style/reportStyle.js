@@ -8,6 +8,8 @@ export const qrReaderStyle = StyleSheet.create({
         height:250,
         borderColor:"white",
         borderWidth:5,
+        alignItems:"center",
+        justifyContent:"center"
     },
     goButton:{
         width:250,
@@ -124,5 +126,87 @@ export const reportStyle = StyleSheet.create({
         flexDirection: 'row',
         marginRight: 30
     }
+
+});
+
+export const userReportStyle = StyleSheet.create({
+    signalementBouton: {
+        alignSelf: "stretch",
+        margin: 15,
+        backgroundColor: "rgba(230, 90, 71,0.7)",
+        borderRadius: 25,
+        padding: 10,
+        alignItems: "center"
+    },
+    generalStats: {
+        flexDirection: "row",
+        alignItems: "center",
+        margin: 10
+    },
+    blocGeneralStats: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    statsValue: {
+        color: "#eee",
+        fontSize: 45,
+        fontWeight: "700"
+    },
+    statsText: {
+        color: "#eee",
+        fontSize: 17,
+        fontWeight: "600"
+    },
+    signalementText:{ 
+        fontSize: 16, 
+        color: "#ddd", 
+        fontWeight: "bold" 
+    }
+
+})
+
+
+export const reportItemStyle = StyleSheet.create({
+    reportItem: {
+        backgroundColor: "rgba(9, 28, 48, 0.8)",
+        padding: 10,
+    },
+    reportItemContainer: {
+        margin: 5,
+        marginHorizontal: 15,
+    },
+    dateItem: {
+        alignItems: "center",
+        padding: 5,
+        flexDirection: "row",
+        justifyContent: "center"
+    },
+    dateText: {
+        color: "#ccc",
+        fontWeight: "500",
+    },
+    dividerDate: {
+        flex: 1,
+        height: 2,
+        backgroundColor: "#ccc",
+        margin: 10
+    },
+    reportText: {
+        color: "#bbb",
+        fontWeight: "600"
+    },
+    reportItemLocation:
+    {
+        marginTop: 3,
+        marginLeft: 5,
+        flexDirection: "row"
+    },
+    reportItemLocationText: {
+        color: "#aaa",
+        fontSize: 12,
+    }
+
+
 
 });
