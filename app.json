@@ -2,17 +2,19 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "primaryColor":"#e1e3e8",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e1e3e8"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "description" : "Une app pour trouver et signaler des Vélibs ainsi qu'accéder à vos statistiques",
     "assetBundlePatterns": [
       "**/*"
     ],

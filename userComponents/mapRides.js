@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Dimensions, TouchableOpacity, ScrollView, Statu
 import { Icon } from 'react-native-elements'
 import MapView from 'react-native-maps';
 
-import {Loading} from './loading'
+import {Loading} from '../components/loading'
 import {getItemValue} from '../utils/storage'
 
 import {dicoStations} from '../utils/general'

@@ -147,7 +147,7 @@ export default class SignalScreen extends React.Component {
 
                     <View style={reportStyle.displayMessage}>
                         <View style={reportStyle.reportMessage}>
-                            <Text style={{ fontSize: 25 }}>
+                            <Text style={reportStyle.reportMessageText}>
                                 {this.state.finalMessage}
                             </Text>
                         </View>
@@ -160,7 +160,7 @@ export default class SignalScreen extends React.Component {
                                     <Icon
                                         name='arrow-left'
                                         type='material-community'
-                                        color="rgb(212, 49, 0)"
+                                        color="#ddd"
                                         size={20}
                                         marginRight={10}
                                     />
@@ -178,7 +178,7 @@ export default class SignalScreen extends React.Component {
                                     <Icon
                                         name='cached'
                                         type='material-community'
-                                        color="rgb(66, 109, 158)"
+                                        color="#ddd"
                                         size={20}
                                         marginRight={10}
                                     />

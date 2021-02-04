@@ -14,15 +14,6 @@ export const profileStyle = StyleSheet.create({
     },
 
     // TopView Style
-    middleTopView:{
-        alignItems:"center",
-        justifyContent:"center"
-    },
-    sideTopView:{
-        width:60,
-        alignItems:"center",
-        justifyContent:"center"
-    },
     sideTopText:{
         marginTop:-4,
         fontWeight:"bold",

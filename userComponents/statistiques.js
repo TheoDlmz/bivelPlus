@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, Dimensions,ScrollView, StatusBar} from 'react-native';
 
-import {Loading} from './loading'
+import {Loading} from '../components/loading'
 import {getItemValue} from '../utils/storage'
 
 import {getStats} from '../utils/stats'
