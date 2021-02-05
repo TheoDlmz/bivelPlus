@@ -59,6 +59,7 @@ export const connect = async (email, password, save) => {
         'value': infosDists.totalMonth
       },];
 
+      console.log("test");
       // On renvoit les infos mises à jour
       const responseUpdate = await fetch(bivelAPI.update, {
         method: 'POST',
@@ -83,7 +84,7 @@ export const connect = async (email, password, save) => {
       await setItemValue('@stations_infos', JSON.stringify(stations_info));
 
     } catch (e) {
-      return failure({ error: 42, message: "Echec pendant la sauvegarde" });
+      return failure({ error: 42, message: "Echec pendant la mise à jour" });
     }
 
     // On enregistre le mot de passe et l'email en local

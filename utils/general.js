@@ -53,7 +53,7 @@ export function dicoStations(station_json) {
 
 export function getPayments(json_file) {
 	var totalDepenses = 0;
-	data = json_file['customerPaymentDtoList'];
+	let data = json_file['customerPaymentDtoList'];
 	for (let i = 0; i < data.length; i++) {
 		totalDepenses += data[i]['amount'];
 
