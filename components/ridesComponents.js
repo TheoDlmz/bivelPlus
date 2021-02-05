@@ -60,6 +60,9 @@ export class RideItemView extends Component {
         dest:this.props.ride.dest
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
 
     render(){
         let r = this.state.ride;

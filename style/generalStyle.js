@@ -48,5 +48,17 @@ export const generalStyle = StyleSheet.create({
         borderRadius: 10,
         margin: 5
     },
+    boldText:{
+        fontWeight:'bold'
+    },
+    classic:
+    {
+        flex:1
+    },
+    classicRow:
+    { 
+        flex: 1,
+        flexDirection: "row" 
+    }
 
 })

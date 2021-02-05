@@ -1,4 +1,5 @@
 import {success, failure} from '../utils/premises'
+import {bivelAPI, velibAPI, header} from './api_adresses'
 
 export const fileReport = async (bikeId, user, error, bivelId, closest) => {
         let bivel_id;
@@ -48,7 +49,7 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
 
         try{
 
-            let url ="https://eu26.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8";
+            let url =velibAPI.report;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -60,12 +61,9 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
 
             if (response.ok){
                 
-                const responseUpdate = await fetch('https://theo.delemazure.fr/bivelAPI/report.php', {
+                const responseUpdate = await fetch(bivelAPI.report, {
                     method: 'POST',
-                    headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Accept':'Application/json'
-                    }),
+                    headers: new Headers(header),
                     body: JSON.stringify(data_Bivel)
                 });
                 return success();
@@ -73,7 +71,6 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
                 return failure();
             }
         }catch(e){
-            console.log(e);
             return failure();
           }
 }

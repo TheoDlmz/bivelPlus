@@ -78,6 +78,10 @@ export class MarkerStation extends Component {
     station: this.props.station
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   render() {
     let station = this.state.station;
     let lat = station.geo[0];

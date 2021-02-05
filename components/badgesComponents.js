@@ -6,6 +6,10 @@ import { badgesItemStyle} from '../style/badgesStyle'
 
 export class BadgeItem extends React.Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
+
     render() {
         let kind = this.props.kind;
         let opacity = 1;

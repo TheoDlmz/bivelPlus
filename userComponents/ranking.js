@@ -31,6 +31,9 @@ export default class RankingView extends React.Component {
             .catch((err) => popupMessage("error", "Erreur de récupération des données", err.message));
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState != this.state;
+    }
     
     getRanking(){
         let nArray = [];
@@ -64,7 +67,7 @@ export default class RankingView extends React.Component {
                     style={generalStyle.fullWidth}
                     onScroll={(e) => this.setState({ "scrollLayer": e.nativeEvent.contentOffset.x })}
                     horizontal>
-                    <View style={generalStyle.fullWidth}>
+                    <View style={generalStyle.fullWidth} key={"total"}>
                         <View style={rankingStyle.titreRanking}>
                             <Text style={rankingStyle.titreText}>
                                 Distance totale
@@ -76,12 +79,13 @@ export default class RankingView extends React.Component {
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}/>) 
+                                    dist: item.score }}
+                                    key={item.rank}/>) 
                             }
 
                         </ScrollView>
                     </View>
-                    <View style={generalStyle.fullWidth}>
+                    <View style={generalStyle.fullWidth} key={"meca"}>
                         <View style={rankingStyle.titreRanking}>
                             <Text style={rankingStyle.titreText}>
                                 Distance mécanique
@@ -93,11 +97,12 @@ export default class RankingView extends React.Component {
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}/>) 
+                                    dist: item.score }}
+                                    key={item.rank}/>) 
                             }
                         </ScrollView>
                     </View>
-                    <View style={generalStyle.fullWidth}>
+                    <View style={generalStyle.fullWidth} key={"month"}>
                         <View style={rankingStyle.titreRanking}>
                             <Text style={rankingStyle.titreText}>
                                 Distance ce mois-ci
@@ -109,7 +114,8 @@ export default class RankingView extends React.Component {
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}/>) 
+                                    dist: item.score }}
+                                    key={item.rank}/>) 
                             }
                         </ScrollView>
                     </View>
