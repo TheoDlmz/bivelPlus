@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get("window");
 
 export const mapStyle = StyleSheet.create({
   markerView:
@@ -41,3 +43,28 @@ export const mapStyle = StyleSheet.create({
   }
 
 });
+
+export const mapRidesStyle = StyleSheet.create({
+
+  
+  layerBloc: {
+    height: 50,
+    flexDirection: 'row',
+    backgroundColor: "#a3acd6"
+  },
+  layerArrow: {
+    width: 50,
+    alignItems: "stretch",
+    justifyContent: "center",
+    paddingLeft: 5,
+    paddingRight: 5
+  },
+  oneLayer: {
+    width: width-100,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  fontLayer: {
+    fontSize: 26,
+  },
+})

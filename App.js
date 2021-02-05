@@ -26,7 +26,7 @@ export default  function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      initialRouteName="Map">
+      initialRouteName="Account">
      
         <Stack.Screen   name="Account" component={AccountView}   options={options}/>
         <Stack.Screen   name="QR" component={QRScreen} options={options}/>

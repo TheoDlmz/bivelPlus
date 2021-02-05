@@ -12,7 +12,9 @@ export class ReportItemView extends React.Component {
         item:this.props.item
     }
 
-
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
     render(){
         let item = this.state.item;
         if (item.type == "date") {

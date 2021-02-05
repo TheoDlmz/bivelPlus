@@ -29,7 +29,9 @@ export class RideItem extends React.Component{
     state={
         params: this.props.params,
     }
-    
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState != this.state;
+    }
     render(){
         let params = this.state.params;
         let color = "#d0f086";

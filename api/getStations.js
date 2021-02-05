@@ -1,16 +1,14 @@
 import {success, failure} from '../utils/premises'
+import { velibAPI, header } from './api_adresses';
 
 
 export const fetchStations = async () => {
     try{
 
       // On envoie les infos au serveur
-      const response = await fetch('https://opendata.paris.fr/api/records/1.0/search/?dataset=velib-disponibilite-en-temps-reel&lang=fr&rows=1600', {
+      const response = await fetch(velibAPI.stations, {
         method: 'GET',
-        headers: new Headers({
-          'Content-Type': 'application/json',
-          'Accept':'Application/json'
-        })
+        headers: new Headers(header)
       });
 
       // On récupere les données

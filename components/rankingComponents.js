@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import {rankingItemStyle} from '../style/rankingStyle'
+import { rankingItemStyle } from '../style/rankingStyle'
 
 export class RankingRow extends React.Component {
     state =
@@ -9,8 +9,11 @@ export class RankingRow extends React.Component {
             params: this.props.params
         }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    }
     render() {
-        
+
         let opacity;
         if (this.state.params.rank % 2 == 0) {
             opacity = 0.8;
