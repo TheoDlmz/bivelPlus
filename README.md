@@ -1,32 +1,20 @@
 # bivelPlus
-Code de l'application Bivel Plus
+Code de l'application Bivel Plus 
 
-## Structure de l'arbre
+## Installation
+Pour l'installer, il faut avoir un téléphone Android et télécharger l'application expo https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US
+Puis se rendre sur le lien https://expo.io/@theodlmz/bivelPlus
 
-### mainComponents
-  Contient les principaux components de la pile : Profile, Map, QRReader, Report
+Vous pouvez ensuite lancer l'application depuis votre téléphone, sans avoir besoin de faire les mises à jour.
 
-### userComponents
-Contient les components de l'utilisateur (badges, stats, etc)
+## Bivel Plus
 
-### components
-Contient les components secondaires (une view répetée pour les trajets par exemple)
+L'application contient de nombreuses possibilités :
+* Une carte des vélibs
+* Une fonction pour signaler facilement des vélos endommagés
+* Une partie utilisateur pour accéder à vos statistiques
 
-### style
-Contient les feuilles de style
-
-### utils
-Contient les fonctions en javascript qui ne sont pas des composantes visuels (calcul des trajets, etc)
-
-### api
-Contient les fonctions pour communiquer avec les différentes API
-
-### assets
-Contient les images
-
-### json
-Contient les fichier json
-
-## Avancée du nettoyage
-
-Prochains : statistiques.js et mapRides.js (puis les différentes API)
+<img src="http://theo.delemazure.fr/bivelAPI/git/bivel0.jpg" width="250"><img src="http://theo.delemazure.fr/bivelAPI/git/bivel1.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/bivel2.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/bivel3.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/bivel4.jpg" width="250">
