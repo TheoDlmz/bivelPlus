@@ -25,6 +25,7 @@ export const fetchStations = async () => {
             "ebike":ebike,
             "meca":meca,
             "capacity":capacity,
+            "place":capacity-meca-ebike,
             "geo":geo,
             "name":fields.name,
             "id_bivel":i

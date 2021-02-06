@@ -21,7 +21,8 @@ export default class RankingView extends React.Component {
     state = {
         userInfos: undefined,
         ranking: undefined,
-        scrollLayer: 0
+        scrollLayer: 0,
+        bivelId:undefined
     };
 
     componentDidMount() {
@@ -29,6 +30,9 @@ export default class RankingView extends React.Component {
         fetchRanking()
             .then((res) => this.setState({ ranking: JSON.parse(res.data) }))
             .catch((err) => popupMessage("error", "Erreur de récupération des données", err.message));
+        getItemValue("@bivel_infos")
+            .then((res) => this.setState({ bivelId: JSON.parse(res).id }))
+            .catch();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -79,8 +83,10 @@ export default class RankingView extends React.Component {
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}
-                                    key={item.rank}/>) 
+                                    dist: item.score,
+                                    id: item.id }}
+                                    key={item.rank}
+                                    myId={this.state.bivelId}/>) 
                             }
 
                         </ScrollView>
@@ -93,12 +99,14 @@ export default class RankingView extends React.Component {
                         </View>
                         <ScrollView style={rankingStyle.ranking}>
 
-                            {this.state.ranking.total.map(item =>
+                            {this.state.ranking.totalMeca.map(item =>
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}
-                                    key={item.rank}/>) 
+                                    dist: item.score ,
+                                    id: item.id }}
+                                    key={item.rank}
+                                    myId={this.state.bivelId}/>) 
                             }
                         </ScrollView>
                     </View>
@@ -110,12 +118,14 @@ export default class RankingView extends React.Component {
                         </View>
                         <ScrollView style={rankingStyle.ranking}>
 
-                            {this.state.ranking.total.map(item =>
+                            {this.state.ranking.month.map(item =>
                                 <RankingRow params={{ 
                                     rank: item.rank, 
                                     pseudo: item.pseudo, 
-                                    dist: item.score }}
-                                    key={item.rank}/>) 
+                                    dist: item.score ,
+                                    id: item.id }}
+                                    key={item.rank}
+                                    myId={this.state.bivelId}/>) 
                             }
                         </ScrollView>
                     </View>

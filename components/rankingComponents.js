@@ -6,7 +6,8 @@ import { rankingItemStyle } from '../style/rankingStyle'
 export class RankingRow extends React.Component {
     state =
         {
-            params: this.props.params
+            params: this.props.params,
+            myId : this.props.myId
         }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -20,20 +21,24 @@ export class RankingRow extends React.Component {
         } else {
             opacity = 0.4;
         }
+        let color = "#eee";
+        if (this.state.myId == this.state.params.id){
+            color = "#edd651";
+        }
         return (
             <View style={[rankingItemStyle.blockranking, { backgroundColor: `rgba(23, 12, 54,${opacity})` }]}>
                 <View style={rankingItemStyle.rank}>
-                    <Text style={rankingItemStyle.boldTxt}>
+                    <Text style={[rankingItemStyle.boldTxt,{color:color}]}>
                         {this.state.params.rank}
                     </Text>
                 </View>
                 <View style={rankingItemStyle.pseudo}>
-                    <Text style={rankingItemStyle.boldTxt}>
+                    <Text style={[rankingItemStyle.boldTxt,{color:color}]}>
                         {this.state.params.pseudo}
                     </Text>
                 </View>
                 <View style={rankingItemStyle.score}>
-                    <Text style={rankingItemStyle.normalTxt}>
+                    <Text style={[rankingItemStyle.normalTxt,{color:color}]}>
                         {this.state.params.dist + " km"}
                     </Text>
                 </View>

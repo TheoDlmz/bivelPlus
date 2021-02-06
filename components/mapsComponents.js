@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View,  Text } from "react-native";
-import {Polyline, Marker} from 'react-native-maps';
-import {sleep} from '../utils/miscellaneous'
+import { View, Text } from "react-native";
+import { Polyline, Marker } from 'react-native-maps';
+import { sleep } from '../utils/miscellaneous'
 
-import {mapStyle} from '../style/mapStyle'
+import { mapStyle } from '../style/mapStyle'
 
 const interpolate = require('color-interpolate');
 
@@ -18,22 +18,23 @@ export class AnimatedPolyline extends Component {
   }
   componentDidMount() {
     sleep(this.props.delay).then(
-        () => 
-    this._animate(this.props.coordinates));
+      () =>
+        this._animate(this.props.coordinates));
   }
 
-  clean(){
+  clean() {
     const self = this;
-    this.setState({coords:[]})
+    this.setState({ coords: [] })
 
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.coordinates !== this.props.coordinates) {
-        this._animate([]);
-        sleep(this.props.delay).then(
-            () => 
-        this._animate(nextProps.coordinates));
-    }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevProps.coordinates!==this.props.coordinates){
+      this._animate([]);
+      sleep(this.props.delay).then(
+        () =>
+          this._animate(nextProps.coordinates));
+      }
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.coords.length !== this.state.coords.length) {
@@ -79,16 +80,29 @@ export class MarkerStation extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return false;
+    return this.props != nextProps;
   }
 
   render() {
     let station = this.state.station;
     let lat = station.geo[0];
     let lon = station.geo[1];
+    let w = 0;
+    let text = "?";
+    let colormap;
+  
+    if (this.props.type == 0){
+      w = Math.min(1, (station.ebike + station.meca) / 20);
+      text = station.meca + '|' + station.ebike;
+      colormap =  interpolate(['#eb290c', '#ebd10c', '#27b32c']);
+    }else if (this.props.type == 1){
+      w = Math.min(1, (station.capacity - (station.ebike + station.meca)) / 10)
+      text  = station.capacity - (station.ebike + station.meca);
+      colormap =  interpolate(['#eb290c', '#5c55bd']);
+    }else{
+      colormap =  interpolate(['#eb290c', '#c47123', '#ebd10c']);
 
-    let colormap = interpolate(['red', 'orange', 'green']);
-    let w = Math.min(1, (station.ebike + station.meca) / 20)
+    }
     let color = colormap(w);
     return (<Marker
       coordinate={{
@@ -101,10 +115,10 @@ export class MarkerStation extends Component {
       onPress={this.props.onPress}
     >
       <View
-        style={[mapStyle.markerView, { backgroundColor: color }]}
+        style={[mapStyle.markerView, {backgroundColor: color }]}
       >
         <Text style={{ color: "white" }}>
-          {station.meca + '|' + station.ebike}
+          {text}
         </Text>
       </View>
     </Marker>)

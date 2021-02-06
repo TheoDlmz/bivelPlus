@@ -40,7 +40,23 @@ export const mapStyle = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0
-  }
+  },
+  animatedBlob:{height:50,
+    width:50,
+    backgroundColor:"rgba(32, 39, 71,0.9)",
+    position:"absolute",
+    borderRadius:50,
+    top:3,
+  },
+  select:{ 
+    position: "absolute", 
+    backgroundColor: "rgba(54, 62, 99,0.9)", 
+    top: 90, 
+    alignSelf: "center",
+    flexDirection:"row",
+    padding:3,
+    borderRadius:40,},
+    
 
 });
 

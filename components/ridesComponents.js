@@ -174,7 +174,6 @@ export class RideItemView extends Component {
                 <View style={{ flex: 2 }}>
                     <TouchableOpacity
                         onPress={this.props.onPressReport}
-                        underlayColor=''
                         style={rideItemStyle.boutonRide} >
                         <Icon name='alert-circle'
                             type='material-community'
@@ -183,7 +182,6 @@ export class RideItemView extends Component {
                     </TouchableOpacity>
                     {!broken &&
                         <TouchableOpacity
-                            underlayColor=''
                             onPress={this.props.onPressSee}
                             style={[rideItemStyle.boutonRide,{backgroundColor: "rgba(100,100,0,0.5)"}]} >
                             <Icon name='eye'

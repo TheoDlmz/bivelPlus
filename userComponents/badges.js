@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Dimensions, StatusBar, ScrollView, TouchableHighlight } from 'react-native';
+import { Text, View, Dimensions, StatusBar, ScrollView, TouchableHighlight, Image } from 'react-native';
 import MapView, { Circle } from 'react-native-maps';
 
 import { Loading } from '../components/loading'
@@ -7,10 +7,10 @@ import { getItemValue } from '../utils/storage'
 
 import { getStats } from '../utils/stats'
 import { compute_badges, compute_events, compute_mesures, compute_voyages } from '../utils/badgeFunctions'
-import {BadgeItem} from '../components/badgesComponents'
+import { BadgeItem } from '../components/badgesComponents'
 
 import { generalStyle } from '../style/generalStyle'
-import {badgesStyle} from '../style/badgesStyle'
+import { badgesStyle } from '../style/badgesStyle'
 
 const { width, height } = Dimensions.get("window");
 
@@ -41,25 +41,25 @@ export default class BadgeView extends React.Component {
         getItemValue("@rides_infos")
             .then((rides_infos) => {
                 getItemValue("@user_infos")
-                .then((user_infos) => {
-                    let u_infos = JSON.parse(user_infos);
-                    let rides = JSON.parse(rides_infos);
-                    let infosDists = getStats(rides);
-                    let mesures = compute_mesures(rides, u_infos['generalDetails']['customerDetails']['birthDate']);
-                    let voyage_max = compute_voyages(mesures, voyages);
-                    let badges_list = compute_badges(mesures, badges);
-                    let badges_obtained = badges_list.obtained;
-                    let badges_blurred = badges_list.not_obtained;
-                    let event_list = compute_events(rides, event);
-                    this.setState({
-                        infosDists: infosDists,
-                        voyage_max: voyage_max,
-                        badges_blurred: badges_blurred,
-                        badges_obtained: badges_obtained,
-                        event_list: event_list
+                    .then((user_infos) => {
+                        let u_infos = JSON.parse(user_infos);
+                        let rides = JSON.parse(rides_infos);
+                        let infosDists = getStats(rides);
+                        let mesures = compute_mesures(rides, u_infos['generalDetails']['customerDetails']['birthDate']);
+                        let voyage_max = compute_voyages(mesures, voyages);
+                        let badges_list = compute_badges(mesures, badges);
+                        let badges_obtained = badges_list.obtained;
+                        let badges_blurred = badges_list.not_obtained;
+                        let event_list = compute_events(rides, event);
+                        this.setState({
+                            infosDists: infosDists,
+                            voyage_max: voyage_max,
+                            badges_blurred: badges_blurred,
+                            badges_obtained: badges_obtained,
+                            event_list: event_list
+                        })
                     })
-                })
-                .catch()
+                    .catch()
             })
             .catch();
 
@@ -69,10 +69,17 @@ export default class BadgeView extends React.Component {
     getCurrentBadge() {
         let description;
         let titre;
+        let image;
+        let seuil;
+        let value;
         if (this.state.kind != undefined) {
+            image = this.state.activeBadge.Pic;
             if (this.state.kind == "badge") {
                 let level = this.state.activeBadge.level;
+                value = this.state.activeBadge.value;
+                seuil = this.state.activeBadge.seuil;
                 let descs = this.state.activeBadge.badge.Descriptions;
+                image = this.state.activeBadge.badge.Pic;
                 level = descs.length + level - 3;
                 description = descs[level].Description;
                 titre = this.state.activeBadge.badge.Titre;
@@ -93,7 +100,7 @@ export default class BadgeView extends React.Component {
                     + " km)";
             }
         }
-        return { description: description, titre: titre }
+        return { description: description, titre: titre, image: image, value: value, seuil: seuil }
     }
 
 
@@ -118,146 +125,168 @@ export default class BadgeView extends React.Component {
 
         let currentBadge = this.getCurrentBadge();
         let titre = currentBadge.titre;
-        let description = currentBadge.description
+        let description = currentBadge.description;
+        let image = currentBadge.image;
+        let value = currentBadge.value;
+        let seuil = currentBadge.seuil;
 
         let nArray = this.getnArray();
 
         return (
-        <View style={generalStyle.container}>
-            <StatusBar hidden={true} />
-            <View style={generalStyle.topView}>
-                <Text style={generalStyle.title}>Badges</Text>
-            </View>
-            <ScrollView
-                snapToInterval={width}
-                decelerationRate="fast"
-                showsHorizontalScrollIndicator={false}
-                style={generalStyle.fullWidth}
-                onScroll={(e) => this.setState({ "scrollLayer": e.nativeEvent.contentOffset.x })}
-                horizontal>
+            <View style={generalStyle.container}>
+                <StatusBar hidden={true} />
+                <View style={generalStyle.topView}>
+                    <Text style={generalStyle.title}>Badges</Text>
+                </View>
                 <ScrollView
+                    snapToInterval={width}
+                    decelerationRate="fast"
+                    showsHorizontalScrollIndicator={false}
                     style={generalStyle.fullWidth}
-                    showsVerticalScrollIndicator={false}
-                >
+                    onScroll={(e) => this.setState({ "scrollLayer": e.nativeEvent.contentOffset.x })}
+                    horizontal>
+                    <ScrollView
+                        style={generalStyle.fullWidth}
+                        showsVerticalScrollIndicator={false}
+                    >
 
-                    <View style={badgesStyle.titleContainer}>
-                        <Text style={badgesStyle.titleText}>
-                            Accomplissements
+                        <View style={badgesStyle.titleContainer}>
+                            <Text style={badgesStyle.titleText}>
+                                Accomplissements
                         </Text>
-                    </View>
-                    <View style={badgesStyle.badgeContainer}>
-                        {this.state.badges_obtained.map(index =>
-                            <BadgeItem
-                                index={badges[index.id]}
-                                onPress={() => this.setState({
-                                    activeBadge: { "badge": badges[index.id], "level": index.level },
-                                    kind: "badge"
-                                })}
-                                level={index.level}
-                                kind="badge" />)}
-                        {this.state.badges_blurred.map(index =>
+                        </View>
+                        <View style={badgesStyle.badgeContainer}>
+                            {this.state.badges_obtained.map(index =>
+                                <BadgeItem
+                                    index={badges[index.id]}
+                                    onPress={() => this.setState({
+                                        activeBadge: {
+                                            "badge": badges[index.id],
+                                            "level": index.level,
+                                            "value": index.value,
+                                            "seuil": index.seuil
+                                        },
+                                        kind: "badge"
+                                    })}
+                                    level={index.level}
+                                    kind="badge" />)}
+                            {this.state.badges_blurred.map(index =>
+                                <BadgeItem
+                                    onPress={() => { }}
+                                    index={badges[index]}
+                                    kind="blurred" />)}
+                        </View>
+                    </ScrollView>
+
+                    <ScrollView
+                        style={generalStyle.fullWidth}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <View style={badgesStyle.titleContainer}>
+                            <Text style={badgesStyle.titleText}>
+                                Carnet de Voyages
+                        </Text>
+                        </View>
+                        <MapView
+                            minZoomLevel={0}
+                            style={badgesStyle.mapStyle}
+                            initialRegion={{
+                                latitude: 48.864716,
+                                longitude: 2.349014,
+                                latitudeDelta: this.state.infosDists.total / 50,
+                                longitudeDelta: this.state.infosDists.total / 50,
+                            }}>
+                            <Circle
+                                center={{
+                                    latitude: 48.864716,
+                                    longitude: 2.349014
+                                }}
+                                radius={this.state.infosDists.total * 1000}
+                                fillColor="rgba(150,50,50,0.3)"
+                                strokeColor="rgba(150,50,50,0.8)"
+                                strokeWidth={5}
+                            />
+                        </MapView>
+                        <View style={badgesStyle.badgeContainer}>
+                            {voyages.slice(0, this.state.voyage_max).map(index =>
+                                <BadgeItem
+                                    onPress={() => this.setState({
+                                        activeBadge: index,
+                                        kind: "voyage"
+                                    })}
+                                    index={index}
+                                    kind="voyage" />)}
                             <BadgeItem
                                 onPress={() => { }}
-                                index={badges[index]}
-                                kind="blurred" />)}
-                    </View>
-                </ScrollView>
+                                index={voyages[this.state.voyage_max]}
+                                kind="blurred" />
+                        </View>
+                    </ScrollView>
 
-                <ScrollView
-                    style={generalStyle.fullWidth}
-                    showsVerticalScrollIndicator={false}
-                >
-                    <View style={badgesStyle.titleContainer}>
-                        <Text style={badgesStyle.titleText}>
-                            Carnet de Voyages
+
+                    <ScrollView
+                        style={generalStyle.fullWidth}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <View style={badgesStyle.titleContainer}>
+                            <Text style={badgesStyle.titleText}>
+                                Evenements
                         </Text>
-                    </View>
-                    <MapView
-                        minZoomLevel={0}
-                        style={badgesStyle.mapStyle}
-                        initialRegion={{
-                            latitude: 48.864716,
-                            longitude: 2.349014,
-                            latitudeDelta: this.state.infosDists.total / 50,
-                            longitudeDelta: this.state.infosDists.total / 50,
-                        }}>
-                        <Circle
-                            center={{
-                                latitude: 48.864716,
-                                longitude: 2.349014
-                            }}
-                            radius={this.state.infosDists.total * 1000}
-                            fillColor="rgba(150,50,50,0.3)"
-                            strokeColor="rgba(150,50,50,0.8)"
-                            strokeWidth={5}
-                        />
-                    </MapView>
-                    <View style={badgesStyle.badgeContainer}>
-                        {voyages.slice(0, this.state.voyage_max).map(index =>
-                            <BadgeItem
-                                onPress={() => this.setState({
-                                    activeBadge: index,
-                                    kind: "voyage"
-                                })}
-                                index={index}
-                                kind="voyage" />)}
-                        <BadgeItem
-                            onPress={() => { }}
-                            index={voyages[this.state.voyage_max]}
-                            kind="blurred" />
-                    </View>
+                        </View>
+                        <View style={badgesStyle.badgeContainer}>
+                            {this.state.event_list.map(index =>
+                                <BadgeItem
+                                    onPress={() => this.setState({
+                                        activeBadge: event[index],
+                                        kind: "event"
+                                    })}
+                                    index={event[index]}
+                                    kind="event" />)}
+                        </View>
+                    </ScrollView>
                 </ScrollView>
 
 
-                <ScrollView
-                    style={generalStyle.fullWidth}
-                    showsVerticalScrollIndicator={false}
-                >
-                    <View style={badgesStyle.titleContainer}>
-                        <Text style={badgesStyle.titleText}>
-                            Evenements
-                        </Text>
-                    </View>
-                    <View style={badgesStyle.badgeContainer}>
-                        {this.state.event_list.map(index =>
-                            <BadgeItem
-                                onPress={() => this.setState({
-                                    activeBadge: event[index],
-                                    kind: "event"
-                                })}
-                                index={event[index]}
-                                kind="event" />)}
-                    </View>
-                </ScrollView>
-            </ScrollView>
+                {(this.state.activeBadge != undefined) &&
+                    <View
+                        style={badgesStyle.whiteOverlay}>
 
-
-            {(this.state.activeBadge != undefined) &&
-                <View
-                    style={badgesStyle.whiteOverlay}>
-
-                    <TouchableHighlight
-                        style={badgesStyle.TouchableOverlay}
-                        onPress={() => this.setState({ activeBadge: undefined, kind: undefined })}
-                        activeOpacity={1}
-                        underlayColor="">
+                        <TouchableHighlight
+                            style={badgesStyle.TouchableOverlay}
+                            onPress={() => this.setState({ activeBadge: undefined, kind: undefined })}
+                            activeOpacity={1}
+                            underlayColor="">
+                            <View />
+                        </TouchableHighlight>
                         <View
                             style={badgesStyle.messageBadge}>
+                            <Image
+                                style={badgesStyle.imageBadge}
+                                source={{ uri: 'http://theo.delemazure.fr/bivelAPI/badges/' + image }}
+                            />
                             <Text style={badgesStyle.badgeTitle}>
                                 {titre}
                             </Text>
                             <Text style={badgesStyle.badgeDesc}>
                                 {description}
                             </Text>
+                            { (this.state.kind == "badge") && 
+                                <View style={badgesStyle.countBar}>
+                                    <View style={[badgesStyle.loadingBar,{ width: Math.min(100, 100 * value / seuil) + "%"}]} />
+                                    <Text style={{fontWeight:"bold",letterSpacing:1}}>
+                                        {Math.round(value) + "/" + seuil}
+                                    </Text>
+                                </View>
+                            }
                         </View>
-                    </TouchableHighlight>
-                </View>
-            }
+                    </View>
+                }
 
-            <View style={generalStyle.bottomView}>
-                {nArray.map((whatWePush) => <View style={[generalStyle.bottomDot, { backgroundColor: whatWePush }]} />)}
-            </View>
-        </View>);
+
+                <View style={generalStyle.bottomView}>
+                    {nArray.map((whatWePush) => <View style={[generalStyle.bottomDot, { backgroundColor: whatWePush }]} />)}
+                </View>
+            </View>);
     }
 }
 

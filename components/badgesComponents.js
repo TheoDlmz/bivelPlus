@@ -19,19 +19,19 @@ export class BadgeItem extends React.Component {
         if (kind == "blurred") {
             opacity = 0.4;
             blurRadius = 5;
-            backgroundColor = "#534780";
+            backgroundColor = "rgba(255, 254, 237,1)";
             underlay = "";
         } else if (kind == "voyage") {
-            backgroundColor = "#c2caed";
+            backgroundColor = "rgba(232, 198, 181,1)";
 
         } else if (kind == "badge") {
             let level = this.props.level;
             if (level == 0) {
-                backgroundColor = "rgba(238, 245, 142, 0.2)";
+                backgroundColor = "rgba(255, 252, 212,1)";
             } else if (level == 1) {
-                backgroundColor = "rgba(238, 245, 142, 0.5)";
+                backgroundColor = "rgba(255, 246, 128,1)";
             } else if (level == 2) {
-                backgroundColor = "rgba(238, 245, 142, 1)";
+                backgroundColor = "rgba(240, 226, 53, 1)";
             }
         } else if (kind == "event") {
             backgroundColor = "#add9db";

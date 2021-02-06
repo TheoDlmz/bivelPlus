@@ -377,15 +377,23 @@ export function compute_badges(mesures, json_badges) {
 		let value = mesures[mesure];
 		let levels = json_badges[i]['Descriptions'];
 		let success = -1;
+		let seuil = levels[0].Seuil;
 		for (let j = 0; j < levels.length; j++) {
 			if (levels[j].Seuil <= value) {
 				success = j;
+				if (j < levels.length-1){
+					seuil = levels[j+1].Seuil
+				}
 			}
 		}
 
 
 		if (success >= 0) {
-			obtained.push({ "id": i, "level": 3 + success - levels.length });
+			obtained.push({ 
+				"id": i, 
+				"level": 3 + success - levels.length, 
+				"seuil":seuil,
+				"value":value });
 		} else {
 			notobtained.push(i);
 		}
