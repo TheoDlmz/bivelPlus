@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Dimensions, Text, Image, TouchableOpacity, StatusBar, ScrollView } from "react-native";
+import { View, Dimensions, Text, Image, TouchableOpacity, StatusBar, ScrollView, BackHandler  } from "react-native";
 import { Icon } from 'react-native-elements';
 
 import { fileReport } from '../api/reportVelib';
@@ -12,6 +12,10 @@ import { generalStyle } from '../style/generalStyle'
 
 
 export default class SignalScreen extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
 
     state = {
         error: require('../json/report.json'),
@@ -55,7 +59,21 @@ export default class SignalScreen extends React.Component {
         getItemValue("@user_infos")
             .then((res) => this.setState({ user: JSON.parse(res) }))
             .catch();
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+    handleBackButtonClick() {
+        if (this.state.currentError){
+            this.setState({ currentError: undefined});
+            this.scrollLayer.scrollTo({ x: 0 })
+        }else{
+            this.props.navigation.goBack();
+        }
+        return true;
     }
 
     goback() {
@@ -97,7 +115,7 @@ export default class SignalScreen extends React.Component {
                                 <View style={reportStyle.boxError1}>
                                     <Image
                                         style={reportStyle.imageError}
-                                        source={{ uri: 'http://theo.delemazure.fr/bivelAPI/reports/' + e.pic }}
+                                        source={{ uri: 'http://theo.delemazure.fr/bivelAPI/reports_pic/' + e.pic }}
                                     />
                                     <Text style={{ fontWeight: 'bold' }}>
                                         {e.name}

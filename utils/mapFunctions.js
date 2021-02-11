@@ -386,7 +386,8 @@ function convertRad(input) {
 }
 
 function distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre) {
-
+	
+	/*
 	let R = 6378000 //Rayon de la terre en mètre
 
 	let lat_a = convertRad(lat_a_degre);
@@ -395,6 +396,8 @@ function distance(lat_a_degre, lon_a_degre, lat_b_degre, lon_b_degre) {
 	let lon_b = convertRad(lon_b_degre);
 
 	let d = R * (Math.PI / 2 - Math.asin(Math.sin(lat_b) * Math.sin(lat_a) + Math.cos(lon_b - lon_a) * Math.cos(lat_b) * Math.cos(lat_a)))
+	*/
+	let d = ((lat_a_degre-lat_b_degre)*60)**2 + ((lon_a_degre-lon_b_degre)*37)**2
 	return d;
 }
 
@@ -414,7 +417,8 @@ export function closest_station(position, stations) {
 			argmin = id;
 		}
 	}
-	return stations[argmin];
+	console.log(mindist,stations[argmin])
+	return {"id":stations[argmin][3],"name":stations[argmin][0]};
 
 
 

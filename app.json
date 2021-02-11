@@ -2,19 +2,19 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.1.11",
+    "version": "0.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "primaryColor":"#e1e3e8",
+    "primaryColor": "#e1e3e8",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#e1e3e8"
+      "backgroundColor": "#eeeeee"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "description" : "Une app pour trouver et signaler des Vélibs ainsi qu'accéder à vos statistiques",
+    "description": "Une app pour trouver et signaler des Vélibs ainsi qu'accéder à vos statistiques",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -22,10 +22,8 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+      "package": "com.theodlmz.bivelPlus",
+      "permissions": [ "CAMERA", "LOCATION" ]
     },
     "web": {
       "favicon": "./assets/favicon.png"

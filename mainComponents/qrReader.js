@@ -43,7 +43,7 @@ export default class QRScreen extends React.Component{
                 latitude:location.coords.latitude,
                 longitude:location.coords.longitude};
                 let stations = this.state.stations;
-                let closest = closest_station(user_pos, stations)[0];
+                let closest = closest_station(user_pos, stations).name;
                 this.props.navigation.navigate('Report',{bikeId:idVelib,closest:closest, from:'Map'});
                 this.setState({scanned:false});
                 })

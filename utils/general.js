@@ -44,7 +44,7 @@ export function dicoStations(station_json) {
 	var dico = {};
 	let data = station_json['data']['stations'];
 	for (let i = 0; i < data.length; i++) {
-		dico[data[i]['station_id']] = [data[i]['name'], data[i]['lat'], data[i]['lon']];
+		dico[data[i]['station_id']] = [data[i]['name'], data[i]['lat'], data[i]['lon'],data[i]['stationCode']];
 	}
 	return dico
 

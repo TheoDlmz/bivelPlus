@@ -3,6 +3,7 @@ import { Text, View, Dimensions } from 'react-native';
 import Svg, { Line, Rect } from 'react-native-svg';
 import { StackedAreaChart, Grid, XAxis, YAxis, StackedBarChart, AreaChart, PieChart } from 'react-native-svg-charts'
 import * as shape from 'd3-shape'
+import { fetchStationInfos } from '../api/getStations'
 
 import {
     evolDist, distribDistHour, distribSpeed, distribDistDay,
@@ -1164,3 +1165,86 @@ export class MonthDist extends React.Component {
     }
 }
 
+export class StationChart extends React.Component {
+    state = {
+        data: undefined,
+        station: this.props.station
+    };
+
+    getData() {
+        fetchStationInfos(this.props.station.id_station)
+            .then((res) => {
+                let my_data = res.data;
+                let ebike = my_data.ebike;
+                let meca = my_data.meca;
+                let n = ebike.length;
+                let data = [];
+                let yval = [];
+
+                for (let i = 0; i < n; i++) {
+
+                    data.push({
+                        elec: ebike[i],
+                        meca: meca[i],
+                        other: this.state.station.capacity-meca[i]-ebike[i]
+                    });
+                    yval.push(ebike[i]+meca[i]);
+
+                }
+                this.setState({ data: data, yval: yval });
+            })
+            .catch()
+    }
+    componentDidMount() {
+        this.getData();
+
+    }
+
+
+
+    render() {
+        if (this.state.data == undefined) {
+            return <View />
+        }
+
+
+
+
+        return <View style={{ margin: 5, flex: 1 }}>
+
+            <View style={generalStyle.classicRow}>
+                <YAxis
+                    data={this.state.yval}
+                    max={this.state.station.capacity}
+                    min={0}
+                    contentInset={{ top: 20, bottom: 20 }}
+                    svg={{
+                        fill: '#ddd',
+                        fontSize: 12,
+                    }}
+                    style={{ width: 30 }}
+                    numberOfTicks={5}
+                    formatLabel={(value) => `${value}`}
+                /><StackedAreaChart
+                    style={{ flex: 1 }}
+                    data={this.state.data}
+                    keys={["meca", "elec","other"]}
+                    contentInset={{ top: 20, bottom: 20 }}
+                    colors={[colorMeca, colorElec,"rgba(0,0,0,0)"]}
+                    curve={shape.curveMonotoneX}
+                    numberOfTicks={5}
+                    animate={true}
+                    animationDuration={1000}
+                >
+                    <Grid svg={{
+                        stroke: "#bbb",
+                        strokeOpacity: 0.2,
+                        strokeWidth: 1
+                    }} />
+                </StackedAreaChart>
+            </View></View>
+
+    }
+
+
+}

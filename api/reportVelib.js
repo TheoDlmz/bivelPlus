@@ -38,7 +38,6 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             "message":error.message,
             "station":station
         }
-        
         var formBody = [];
         for (var property in data) {
             var encodedKey = encodeURIComponent(property);

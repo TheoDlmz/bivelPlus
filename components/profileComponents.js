@@ -30,7 +30,7 @@ export class RideItem extends React.Component{
         params: this.props.params,
     }
     shouldComponentUpdate(nextProps, nextState) {
-        return nextState != this.state;
+        return nextProps != this.props;
     }
     render(){
         let params = this.state.params;

@@ -63,11 +63,14 @@ export const reportStyle = StyleSheet.create({
         width: width-20
     },
     reportMessage: {
-        alignItems: "center",
+        textAlign: "center",
+        fontSize:16,
+        fontWeight:"500"
     },
     reportMessageText:{ 
         fontSize: 25,
-         color:"#eee" 
+         color:"#eee",
+         textAlign:"center",
     },
     displayMessage: {
         alignItems: "stretch",

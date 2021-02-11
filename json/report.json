@@ -1,24 +1,4 @@
 [{
-    "name":"VBox",
-    "pic":"vbox.jpg",
-    "subIssues":[{
-        "name":"La VBox ne s'allume pas",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"L'écran de la VBox du Vélib reste éteint et semble ne pas pouvoir s'allumer"
-    },{
-        "name":"Ecran cassé ou dysfonctionnel",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage"
-    },{
-        "name":"La batterie s'arrête en milieu de course",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
-    },{
-        "name":"La VBox affiche une erreur",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo est bloqué dans la bornette et affiche une erreur"
-    }]
-},{
     "name":"Bloqué station",
     "pic":"station.jpg",
     "subIssues":[{
@@ -47,6 +27,30 @@
         "message":"Le vélo ne se déverouille pas"
     }]
 },{
+    "name":"Roues/Pneus",
+    "pic":"roue.jpg",
+    "subIssues":[{
+        "name":"La roue est tordue",
+        "error":"Roue voilée",
+        "message":"La roue du Vélib est tordue"
+    },{
+        "name":"La roue est bloquée",
+        "error":"Roue bloquée",
+        "message":"La roue du Vélib est bloquée"
+    },{
+        "name":"La roue est dessérée",
+        "error":"Roue desserrée",
+        "message":"La roue du Vélib n'est pas assez sérrée"
+    },{
+        "name":"Pneu crevé ou dégonflé",
+        "error":"Pneu dégonflé ou perçé",
+        "message":"Le pneu du Vélib est à plat"
+    },{
+        "name":"Chambre à air sortie",
+        "error":"Pneu dégonflé ou perçé",
+        "message":"Le pneu est complétement défoncé (chambre à air sortie)"
+    }]
+},{
     "name":"Batterie",
     "pic":"batterie.jpg",
     "subIssues":[{
@@ -71,7 +75,7 @@
     "pic":"pedale.jpg",
     "subIssues":[{
         "name":"Pédale dans le vide (chaîne manquante ou déraillée)",
-        "error:":"Chaîne cassée ou déraillée",
+        "error":"Chaîne cassée ou déraillée",
         "message":"La chaîne est cassée (le vélo pédale dans le vide)"
     },{
         "name":"Chaîne qui déraille légerement pendant la course",
@@ -85,30 +89,6 @@
         "name":"Pédale(s) bloquée(s)",
         "error":"Pédalier bloqué",
         "message":"Les pédales du Vélibs sont bloquées"
-    }]
-},{
-    "name":"Roues/Pneus",
-    "pic":"roue.jpg",
-    "subIssues":[{
-        "name":"La roue est tordue",
-        "error":"Roue voilée",
-        "message":"La roue du Vélib est tordue"
-    },{
-        "name":"La roue est bloquée",
-        "error":"Roue bloquée",
-        "message":"La roue du Vélib est bloquée"
-    },{
-        "name":"La roue est dessérée",
-        "error":"Roue desserrée",
-        "message":"La roue du Vélib n'est pas assez sérrée"
-    },{
-        "name":"Pneu crevé ou dégonflé",
-        "error":"Pneu dégonflé ou perçé",
-        "message":"Le pneu du Vélib est à plat"
-    },{
-        "name":"Chambre à air sortie",
-        "error":"Pneu dégonflé ou perçé",
-        "message":"Le pneu est complétement défoncé (chambre à air sortie)"
     }]
 },{
     "name":"Selle",
@@ -169,5 +149,22 @@
         "name":"Feux avants et arrières cassés",
         "error":"Dysfonctionnement des feux",
         "message":"Les feux AVANT et ARRIERE sont cassés"
+    }]
+},
+{
+    "name":"Autre",
+    "pic":"other.jpg",
+    "subIssues":[{
+        "name":"Ecran cassé ou dysfonctionnel",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage"
+    },{
+        "name":"La batterie s'arrête en milieu de course",
+        "error":"Vélib' électrique en panne",
+        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
+    },{
+        "name":"La VBox affiche une erreur",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo est bloqué dans la bornette et affiche une erreur"
     }]
 }]
