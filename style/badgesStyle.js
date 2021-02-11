@@ -10,7 +10,7 @@ export const badgesStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         padding: 5
-    }, 
+    },
     badgeContainer: {
         flexDirection: "row",
         justifyContent: "center",
@@ -23,12 +23,12 @@ export const badgesStyle = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        opacity: 0.8,
-        backgroundColor: "#d0dbf7",
         alignItems: "stretch",
         justifyContent: "center"
     },
     TouchableOverlay: {
+        opacity: 0.8,
+        backgroundColor: "#d0dbf7",
         height: "100%",
         alignItems: "stretch",
         justifyContent: "center"
@@ -37,13 +37,15 @@ export const badgesStyle = StyleSheet.create({
         margin: 15,
         backgroundColor: "rgb(34, 49, 87)",
         alignItems: "center",
+        position: "absolute",
+        alignSelf: "center",
         padding: 20
     },
     badgeTitle: {
         margin: 2,
         fontSize: 22,
         fontWeight: 'bold',
-        color: "#ddd"
+        color: "#eee"
     },
     badgeDesc: {
         margin: 1,
@@ -52,18 +54,40 @@ export const badgesStyle = StyleSheet.create({
         color: "#ddd"
     },
     mapStyle:
-    { 
+    {
         marginHorizontal: 20,
-        height: 150 
+        height: 150
     },
+    imageBadge:
+    {
+        width: 140,
+        height: 140,
+        borderRadius: 140,
+        marginTop: -100
+    },
+    countBar:
+    {
+        backgroundColor: "#b9cfed",
+        height: 20,
+        width: "100%",
+        alignItems: "center",
+        marginTop: 10
+    },
+    loadingBar:
+    {
+        position: "absolute",
+        height: 20,
+        backgroundColor: "#6d94c9",
+        alignSelf: "flex-start"
+    }
 
 
 });
 
 export const badgesItemStyle = StyleSheet.create({
     badgeIcon: {
-        width: 90,
-        height: 90,
+        width: 88,
+        height: 88,
         margin: 10,
         opacity: 0.8,
         borderRadius: 50,

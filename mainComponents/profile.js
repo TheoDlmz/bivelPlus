@@ -147,6 +147,15 @@ export default class AccountView extends React.Component{
                             </Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={{marginHorizontal:30,backgroundColor:"#5c160a", padding:10}}>
+                        <Text style={{textAlign:"center",fontSize:16,color:"#ccc"}}>
+                        <Text style={{fontWeight:"bold",textDecorationLine:"underline"}}
+                        >Attention :
+                        </Text> Ceci n'est pas l'application officielle Vélib, 
+                        elle n'est pas gérée par Smovengo. 
+                        Ne rentrez pas vos identifiants Vélib'.
+                        </Text>
+                    </View>
                 </View>)
         }
 

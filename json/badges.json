@@ -273,7 +273,7 @@
         "Pic":"ecolo.jpg",
         "Descriptions":
         [{
-            "Description":"Vous avez écnomisé plus de 20,6 kg de CO2 en faisant du Vélib, soit le poids d'un Vélib vert.",
+            "Description":"Vous avez économisé plus de 20,6 kg de CO2 en faisant du Vélib, soit le poids d'un Vélib vert.",
             "Seuil":20.6
         }]
     },
