@@ -1186,9 +1186,9 @@ export class StationChart extends React.Component {
                     data.push({
                         elec: ebike[i],
                         meca: meca[i],
-                        other: this.state.station.capacity-meca[i]-ebike[i]
+                        other: this.state.station.capacity - meca[i] - ebike[i]
                     });
-                    yval.push(ebike[i]+meca[i]);
+                    yval.push(ebike[i] + meca[i]);
 
                 }
                 this.setState({ data: data, yval: yval });
@@ -1207,6 +1207,12 @@ export class StationChart extends React.Component {
             return <View />
         }
 
+
+        let d = new Date();
+        let nb_demiheure = d.getHours()*2;
+        if (d.getMinutes() >= 30){
+            nb_demiheure += 1
+        }
 
 
 
@@ -1228,9 +1234,9 @@ export class StationChart extends React.Component {
                 /><StackedAreaChart
                     style={{ flex: 1 }}
                     data={this.state.data}
-                    keys={["meca", "elec","other"]}
+                    keys={["meca", "elec", "other"]}
                     contentInset={{ top: 20, bottom: 20 }}
-                    colors={[colorMeca, colorElec,"rgba(0,0,0,0)"]}
+                    colors={[colorMeca, colorElec, "rgba(0,0,0,0)"]}
                     curve={shape.curveMonotoneX}
                     numberOfTicks={5}
                     animate={true}
@@ -1242,7 +1248,16 @@ export class StationChart extends React.Component {
                         strokeWidth: 1
                     }} />
                 </StackedAreaChart>
-            </View></View>
+            </View>
+            <XAxis
+                data={this.state.data}
+                formatLabel={(value, index) => { 
+                    let hour = (nb_demiheure - (48-value))+48;
+                    if (hour % 8 == 0) { return (parseInt(hour/2)%24)+ "h" } }}
+                svg={{ fontSize: 10, fill: '#bbb' }}
+                style={{marginTop:-12}}
+                contentInset={{ left: 30, right: 8 }}
+            /></View>
 
     }
 

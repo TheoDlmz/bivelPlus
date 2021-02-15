@@ -14,6 +14,10 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             message += "\n A proximité de la station "+closest;    
             station = closest;
         }
+        let meta_error = "Vélib' endommagé en station";
+        if (error.error == "Vélib' volé"){
+            meta_error = "Vélib' abandonné hors station"
+        }
         let data = {
             "00N0Y00000RKgb2":bikeId,
             "00N0Y00000RKgb3":user.id,
@@ -21,7 +25,7 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             "recordType":"0120Y000000Kezr",
             "description":"",
             "type":"Incident",
-            "00N0Y00000RKgb3":"Vélo endommagé",
+            "00N0Y00000RKgb3":meta_error,
             "00N0Y00000RKgat":error.error,
             "orgid":"00D0Y0000035SQ3",
             "00N0Y00000RKgb7":user.firstname,
@@ -30,7 +34,7 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             "name":user.lastname,
             "email":user.email
         };
-
+        
         let data_Bivel ={
             "bikeId":bikeId,
             "bivelId":bivel_id,

@@ -49,6 +49,10 @@
         "name":"Chambre à air sortie",
         "error":"Pneu dégonflé ou perçé",
         "message":"Le pneu est complétement défoncé (chambre à air sortie)"
+    },{
+        "name":"Elément présent dans la roue",
+        "error":"Elément présent dans la roue",
+        "message":"Un élément est présent dans la roue"
     }]
 },{
     "name":"Batterie",
@@ -133,6 +137,10 @@
         "name":"Poignée(s) abîmée(s)",
         "error":"Selle et/ou poignées abîmées",
         "message":"Les poignées du Vélib sont abîmées"
+    },{
+        "name":"Guidon desserré",
+        "error":"Guidon desserré",
+        "message":"Le guidon du vélo n'est pas bien serré"
     }]
 },{
     "name":"Lumières/Feux",
@@ -155,6 +163,18 @@
     "name":"Autre",
     "pic":"other.jpg",
     "subIssues":[{
+        "name":"Vélo volé ou abandonné",
+        "error":"Vélib' volé",
+        "message":"Ce vélo semble avoir été volé."
+    },{
+        "name":"Vélo totalement détruit",
+        "error":"Autre",
+        "message":"Le vélo est complétement hors d'usage, une partie entière du vélo est détruite."
+    },{
+        "name":"Cadre du vélo tordu",
+        "error":"Cadre tordu",
+        "message":"Le cadre du vélo est tordu"
+    },{
         "name":"Ecran cassé ou dysfonctionnel",
         "error":"Vélib' bloqué dans la bornette",
         "message":"L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage"

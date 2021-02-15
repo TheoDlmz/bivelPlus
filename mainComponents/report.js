@@ -9,6 +9,7 @@ const { width, height } = Dimensions.get("window");
 
 import { reportStyle} from '../style/reportStyle'
 import { generalStyle } from '../style/generalStyle'
+import { TextInput } from 'react-native';
 
 
 export default class SignalScreen extends React.Component {
@@ -26,6 +27,7 @@ export default class SignalScreen extends React.Component {
         user: undefined,
         bivelId: undefined,
         finalMessage: "Rapport en cours d'envoi...",
+        other: ""
     }
 
     sendReport(e) {
@@ -160,6 +162,31 @@ export default class SignalScreen extends React.Component {
                                     </TouchableOpacity>)
                             })
                         }
+                        <View
+                            style={reportStyle.textInput}>
+                    <TextInput
+                            placeholder="Autre (décrire le problème)"
+                            textAlign="center"
+                            style={reportStyle.textInputText}
+                            maxLength={250}
+                            onChangeText={(text) => this.setState({other:text})}
+                            value={this.state.other}
+                        />
+                        <TouchableOpacity
+                        style={reportStyle.textInputSubmit}
+                        onPress={() => this.sendReport({
+                            error:"Autre",
+                            message:this.state.other
+                        })}>
+                            <Icon
+                             name='check'
+                             type='material-community'
+                             color="#ddd"
+                             size={35}
+                             marginRight={10}
+                            />
+                        </TouchableOpacity>
+                        </View>
                     </View>
 
 
