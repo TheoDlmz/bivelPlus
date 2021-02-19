@@ -94,7 +94,7 @@ export const mapStyle = StyleSheet.create({
   bottomTextBulle: {
     margin: 5,
     alignItems: "center",
-    flex: 1
+    width:"30%",
   },
   bottomViewInfos: {
     flexDirection: "row",

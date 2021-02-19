@@ -10,6 +10,10 @@
         "error":"Vélib' bloqué dans la bornette",
         "message":"Le vélo ne sort pas de la bornette une fois dévérouillé"
     },{
+        "name":"Vélo bloqué en pause (cadenas)",
+        "error":"Vélib' bloqué dans la bornette",
+        "message":"Le vélo est bloqué sur une pause (cadenas sur la Vbox)"
+    },{
         "name":"Erreur 01",
         "error":"Vélib' bloqué dans la bornette",
         "message":"Le vélo ne se déverouille pas (Erreur 01)"
