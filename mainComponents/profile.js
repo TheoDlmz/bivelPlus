@@ -96,10 +96,16 @@ export default class AccountView extends React.Component{
     connectUser =  async () => {
         popupMessage('info', 'Connexion en cours', 'Cela devrait prendre quelques secondes')
         connect(this.state.email,this.state.password, true)
-            .then(async () => {
-                popupMessage('success', 'Connexion réussie', 'Vous êtes désormais connecté');
-                this.setState({logged:true});
-                this.loadData();
+            .then(async (success) => {
+                if (success.code == "201"){
+                    popupMessage('success', 'Compte activé', 'Votre compte est activé');
+                    this.setState({password:""});
+                }else if (success.code == "200"){
+                    popupMessage('success', 'Connexion réussie', 'Vous êtes désormais connecté');
+                    this.setState({logged:true});
+                    this.setState({password:"",email:""});
+                    this.loadData();
+                }
           })
           .catch((err) => 
             popupMessage('error', 'Connexion échouée', err.message)          
@@ -123,7 +129,7 @@ export default class AccountView extends React.Component{
                     <View style={loginStyle.loginBox}>
                         <TextInput
                             style={loginStyle.input}
-                            placeholder="email adress"
+                            placeholder="adesse email"
                             keyboardType="email-address"
                             autoCapitalize = 'none'
                             onChangeText={(text) => this.setState({email:text})}
@@ -131,7 +137,7 @@ export default class AccountView extends React.Component{
                         />
                         <TextInput
                             style={loginStyle.input}
-                            placeholder="password"
+                            placeholder="mot de passe"
                             autoCapitalize = 'none'
                             secureTextEntry={true}
                             maxLength={20}
@@ -148,12 +154,15 @@ export default class AccountView extends React.Component{
                         </TouchableOpacity>
                     </View>
                     <View style={{marginHorizontal:30,backgroundColor:"#5c160a", padding:10}}>
-                        <Text style={{textAlign:"center",fontSize:16,color:"#ccc"}}>
+                        <Text style={{textAlign:"center",fontSize:13,color:"#ccc"}}>
                         <Text style={{fontWeight:"bold",textDecorationLine:"underline"}}
-                        >Attention :
-                        </Text> Ceci n'est pas l'application officielle Vélib, 
+                        >Attention : {"\n"}
+                        </Text> Ceci n'est pas l'application officielle Vélib', 
                         elle n'est pas gérée par Smovengo. 
-                        Ne rentrez pas vos identifiants Vélib'.
+                        Ne rentrez pas vos identifiants Vélib'.  {"\n"}
+                         Vous devez faire partie 
+                        de la béta-test pour vous connecter. Pour plus d'informations, suivez-nous
+                        sur Twitter et Github.
                         </Text>
                     </View>
                 </View>)

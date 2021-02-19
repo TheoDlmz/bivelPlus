@@ -21,6 +21,9 @@ export const connect = async (email, password, save) => {
     const json = await response.json();
 
     // Si echec, on le signale à l'utilisateur
+    if (json["code"] == 201) {
+      return success({code:201});
+    }
     if (json["code"] != 200) {
       return failure({ error: json["code"], message: json["error"] });
     }
@@ -96,7 +99,7 @@ export const connect = async (email, password, save) => {
       return failure({ error: 42, message: "Echec pendant la sauvegarde" });
     }
 
-    return success();
+    return success({code:200});
 
 
   } catch (e) {

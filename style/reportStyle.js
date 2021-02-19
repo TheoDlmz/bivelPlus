@@ -67,6 +67,13 @@ export const reportStyle = StyleSheet.create({
         fontSize:16,
         fontWeight:"500"
     },
+    textInputText:{
+        textAlign: "center",
+        fontSize:16,
+        fontWeight:"500",
+        flex:1,
+        margin:10        
+    },
     reportMessageText:{ 
         fontSize: 25,
          color:"#eee",
@@ -101,6 +108,16 @@ export const reportStyle = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+    textInput: {
+        width: width - 40,
+        borderWidth: 3,
+        borderColor: "rgba(21, 25, 38,0.9)",
+        margin: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor:"white", 
+        flexDirection:"row"
+    },
     titleReport: {
         fontWeight: 'bold',
         fontSize: 20
@@ -128,6 +145,13 @@ export const reportStyle = StyleSheet.create({
         backgroundColor: 'rgba(66, 109, 158,0.3)',
         flexDirection: 'row',
         marginRight: 30
+    },
+    textInputSubmit:{
+        width:50, 
+        backgroundColor:"#0a638a", 
+        height:'100%', 
+        alignItems:"center",
+        padding:5
     }
 
 });

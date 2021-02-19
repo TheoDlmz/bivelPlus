@@ -4,11 +4,15 @@ import { velibAPI, header, bivelAPI } from './api_adresses';
 
 export const fetchStations = async () => {
     try{
-
+      let infos = require('../app.json');
+      let version =  infos.expo.version;
       // On envoie les infos au serveur
       const response = await fetch(bivelAPI.activity, {
-        method: 'GET',
-        headers: new Headers(header)
+        method: 'POST',
+        headers: new Headers(header),
+        body: JSON.stringify({
+          'version': version
+        })
       });
 
       // On récupere les données
@@ -32,7 +36,8 @@ export const fetchStations = async () => {
             "id_bivel":i,
             "id_station":code,
             "last_arrival":fields.last_arrival,
-            "activity":fields.s_tot
+            "activity":fields.s_tot,
+            "broken":fields.broken
         })
       }
       return success({data:stations});

@@ -8,7 +8,7 @@ import { fetchStations } from '../api/getStations'
 import { getItemValue } from '../utils/storage'
 import { addZero, popupMessage, sleep } from '../utils/miscellaneous'
 import { parisCoord, MarkerStation } from '../components/mapsComponents'
-import {closest_station} from '../utils/mapFunctions'
+import { closest_station } from '../utils/mapFunctions'
 
 import { mapStyle } from '../style/mapStyle'
 import { generalStyle } from '../style/generalStyle'
@@ -41,19 +41,19 @@ export default class HomeScreen extends React.Component {
     expend: false,
     expend_size: new Animated.Value(0),
 
-    show_closest:false,
+    show_closest: false,
 
   };
 
 
   componentDidMount() {
+    let infos = require('../app.json');
+    this.setState({ version: infos.expo.version });
     this.loadData(true);
 
     getItemValue("@user_infos")
       .then((res) => this.setState({ userInfos: JSON.parse(res) }))
       .catch();
-    let infos = require('../app.json');
-    this.setState({ version: infos.expo.version });
 
 
 
@@ -73,7 +73,7 @@ export default class HomeScreen extends React.Component {
     clearTimeout(this.intervalID);
   }
 
-  goToInitialRegion = async () =>{
+  goToInitialRegion = async () => {
     Location.getPermissionsAsync().then(() =>
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -82,7 +82,7 @@ export default class HomeScreen extends React.Component {
             longitude: position.coords.longitude
           }
           this.setState({
-            userPos:userPos
+            userPos: userPos
           });
           this.mapview.animateToRegion({
             latitude: position.coords.latitude,
@@ -91,12 +91,12 @@ export default class HomeScreen extends React.Component {
             longitudeDelta: 0.02
           });
           this.showClosest();
-          
+
         },
         (error) => { console.log(error); },
         { enableHighAccuracy: true, timeout: 30000 }
       ));
-      
+
   }
 
 
@@ -107,34 +107,35 @@ export default class HomeScreen extends React.Component {
     fetchStations()
       .then((res) => {
         this.setState({ stations: res.data, last_update: new Date() });
-        if (first){
+        if (first) {
           this.showClosest();
         }
       })
       .catch((err) => popupMessage("error", "Données non accessibles", err.message));
-    this.intervalID = setTimeout(this.loadData.bind(this,false), 60000);
+    this.intervalID = setTimeout(this.loadData.bind(this, false), 60000);
   }
 
 
-  showClosest(){
-      let show = this.state.show_closest;
-      if (show){
-        getItemValue("@stations_infos")
+  showClosest() {
+    let show = this.state.show_closest;
+    if (show) {
+      getItemValue("@stations_infos")
         .then((stations_infos) => {
           let stations = dicoStations(JSON.parse(stations_infos));
           let closest = closest_station(this.state.userPos, stations);
           let id_bivel;
-          for (let i =0; i< this.state.stations.length;i++){
-            if(this.state.stations[i].id_station == closest.id){
+          for (let i = 0; i < this.state.stations.length; i++) {
+            if (this.state.stations[i].id_station == closest.id) {
               id_bivel = this.state.stations[i].id_bivel;
               break
             }
           }
-          this.setState({clic_id:id_bivel});  })
+          this.setState({ clic_id: id_bivel });
+        })
         .catch();
-      }else{
-        this.setState({show_closest:true})
-      }
+    } else {
+      this.setState({ show_closest: true })
+    }
 
   }
   // Je le laisse ici car de toute façon j'aimerai changer la heatmap
@@ -235,13 +236,13 @@ export default class HomeScreen extends React.Component {
     this.setState({ type: x });
   }
 
-  expendBottom(tgt){
+  expendBottom(tgt) {
     Animated.spring(this.state.expend_size, {
       toValue: tgt,
       duration: 1000,
       useNativeDriver: false,
     }).start();
-    this.setState({ expend: (tgt == 1)});
+    this.setState({ expend: (tgt == 1) });
 
 
 
@@ -269,7 +270,7 @@ export default class HomeScreen extends React.Component {
           style={generalStyle.classic}
           followUserLocation={true}
           initialRegion={parisCoord}
-          onPress={() => {this.setState({ clic_id: -1 }); this.expendBottom(0)}}
+          onPress={() => { this.setState({ clic_id: -1 }); this.expendBottom(0) }}
           onMapReady={this.goToInitialRegion.bind(this)}
           onRegionChangeComplete={(center) => { this.updateRegion(center) }}
           ref={node => this.mapview = node}
@@ -334,7 +335,7 @@ export default class HomeScreen extends React.Component {
             }
             {this.state.userInfos == undefined &&
               <Text style={mapStyle.pseudoText}>
-                Login
+                Beta
               </Text>
             }
           </View>
@@ -376,10 +377,10 @@ export default class HomeScreen extends React.Component {
               <Text style={[mapStyle.stationName, { flex: 8 }]}>
                 {this.state.stations[this.state.clic_id].name}
               </Text>
-              <TouchableOpacity 
-              style={{ flex: 1 }}
-              onPress={()=>this.expendBottom(!this.state.expend)}>
-              
+              <TouchableOpacity
+                style={{ flex: 1 }}
+                onPress={() => this.expendBottom(!this.state.expend)}>
+
                 <Icon
                   name={this.state.expend ? 'minus' : 'plus'}
                   type='material-community'
@@ -388,38 +389,18 @@ export default class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: "row", width: "100%" }}>
+            <View style={{ flexDirection: "row", width: "100%", flexWrap: "wrap" }}>
               <View style={mapStyle.bottomTextBulle}>
                 <Text style={mapStyle.bottomTextValue}>
                   {this.state.stations[this.state.clic_id].meca}
                 </Text>
-                <Text style={mapStyle.bottomTextDescVelo}>Verts</Text>
+                <Text style={mapStyle.bottomTextDescVelo}>Mécaniques</Text>
               </View>
               <View style={mapStyle.bottomTextBulle}>
                 <Text style={mapStyle.bottomTextValue}>
                   {this.state.stations[this.state.clic_id].ebike}
                 </Text>
-                <Text style={mapStyle.bottomTextDescVelo}>Bleus</Text>
-              </View>
-              <View style={mapStyle.bottomTextBulle}>
-                <Text style={mapStyle.bottomTextValue}>
-                  {this.state.stations[this.state.clic_id].place}
-                </Text>
-                <Text style={mapStyle.bottomTextDescVelo}>Places</Text>
-              </View>
-
-              <View style={mapStyle.bottomTextBulle}>
-                {this.state.stations[this.state.clic_id].activity > 0 ?
-                  (<Text style={mapStyle.bottomTextValue}>
-                    {Math.round(60 / this.state.stations[this.state.clic_id].activity)}
-                    <Text style={{ fontSize: 12 }}> min</Text>
-                  </Text>) :
-                  (<Text style={mapStyle.bottomTextValue}>
-                    {">1"}
-                    <Text style={{ fontSize: 12 }}> h</Text>
-                  </Text>)}
-
-                <Text style={mapStyle.bottomTextDescVelo}>Attente</Text>
+                <Text style={mapStyle.bottomTextDescVelo}>Électriques</Text>
               </View>
               <View style={mapStyle.bottomTextBulle}>
 
@@ -444,13 +425,41 @@ export default class HomeScreen extends React.Component {
                 }
                 <Text style={mapStyle.bottomTextDescVelo}>Dernier</Text>
               </View>
+              <View style={mapStyle.bottomTextBulle}>
+                <Text style={mapStyle.bottomTextValue}>
+                  {this.state.stations[this.state.clic_id].place}
+                </Text>
+                <Text style={mapStyle.bottomTextDescVelo}>Places</Text>
+              </View>
+
+              <View style={mapStyle.bottomTextBulle}>
+                <Text style={mapStyle.bottomTextValue}>
+                  {this.state.stations[this.state.clic_id].broken}
+                </Text>
+                <Text style={mapStyle.bottomTextDescVelo}>Cassés</Text>
+              </View>
+
+              <View style={mapStyle.bottomTextBulle}>
+                {this.state.stations[this.state.clic_id].activity > 0 ?
+                  (<Text style={mapStyle.bottomTextValue}>
+                    {Math.round(60 / this.state.stations[this.state.clic_id].activity)}
+                    <Text style={{ fontSize: 12 }}> min</Text>
+                  </Text>) :
+                  (<Text style={mapStyle.bottomTextValue}>
+                    {">1"}
+                    <Text style={{ fontSize: 12 }}> h</Text>
+                  </Text>)}
+
+                <Text style={mapStyle.bottomTextDescVelo}>Attente</Text>
+              </View>
+
             </View>
-            <Animated.View style={{height:height_bottom}}>
-            {this.state.expend &&
-              <StationChart
-                station={this.state.stations[this.state.clic_id]}
-                key={`stationChart_${this.state.clic_id}`} />
-            }
+            <Animated.View style={{ height: height_bottom }}>
+              {this.state.expend &&
+                <StationChart
+                  station={this.state.stations[this.state.clic_id]}
+                  key={`stationChart_${this.state.clic_id}`} />
+              }
             </Animated.View>
           </View>
 

@@ -2,14 +2,17 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.2.1",
+    "version": "0.2.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#e1e3e8",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#eeeeee"
+      "backgroundColor": "#ffffff"
+    },
+    "androidStatusBar":{
+      "hidden":true
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +26,12 @@
     },
     "android": {
       "package": "com.theodlmz.bivelPlus",
-      "permissions": [ "CAMERA", "LOCATION" ]
+      "permissions": [ "CAMERA", "LOCATION" ],
+      "config":{
+        "googleMaps":{
+          "apiKey":"AIzaSyBPI2CVkhaUCfxvcxPDdYkVqXBfAerTm7Q"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
