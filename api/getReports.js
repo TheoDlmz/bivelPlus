@@ -9,10 +9,7 @@ export const fetchReports = async () => {
     let email = await getItemValue("@username");
     const response = await fetch(bivelAPI.myReports, {
       method: 'POST',
-      headers: new Headers(header),
-      body: JSON.stringify({
-        'email': email
-      })
+      headers: new Headers(header)
     });
 
     // On récupere les données
@@ -23,7 +20,7 @@ export const fetchReports = async () => {
     }
 
     // Sinon  on continue
-    return success({ data: JSON.stringify(json) });
+    return success({ data: json.total });
 
   } catch (e) {
     return failure({ error: 503, message: "Server not reachable" });

@@ -29,12 +29,12 @@ export class AnimatedPolyline extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevProps.coordinates!==this.props.coordinates){
+    if (prevProps.coordinates !== this.props.coordinates) {
       this._animate([]);
       sleep(this.props.delay).then(
         () =>
           this._animate(nextProps.coordinates));
-      }
+    }
   }
   shouldComponentUpdate(nextProps, nextState) {
     if (nextState.coords.length !== this.state.coords.length) {
@@ -98,31 +98,33 @@ export class MarkerStation extends Component {
     let lon = station.geo[1];
     let w = 0;
     let text = "?";
+    let text2 = "?";
     let colormap;
     let color;
-    if (this.props.type == 0){
+    if (this.props.type == 0) {
       w = Math.min(1, (station.ebike + station.meca) / 20);
-      text = station.meca + '|' + station.ebike;
-      colormap =  interpolate(['#eb290c', '#ebd10c', '#27b32c']);
+      text = station.meca;
+      text2 = station.ebike;
+      colormap = interpolate(['#eb290c', '#ebd10c', '#27b32c']);
       color = colormap(w);
-    }else if (this.props.type == 1){
+    } else if (this.props.type == 1) {
       w = Math.min(1, (station.capacity - (station.ebike + station.meca)) / 10)
-      text  = station.capacity - (station.ebike + station.meca);
-      colormap =  interpolate(['#eb290c', '#5c55bd']);
+      text = station.capacity - (station.ebike + station.meca);
+      colormap = interpolate(['#eb290c', '#5c55bd']);
       color = colormap(w);
-    }else{
-      w = Math.min(1, (station.activity / 6));
-      colormap =  interpolate(['#eb290c', '#ebd10c', '#d7de0b']);
+    } else {
+      w = Math.min(1, (station.activity / 10));
+      colormap = interpolate(['#d13e24', '#e88031', '#f5ae33', '#d9d61c']);
       color = colormap(w);
-      if (station.activity == 0){
+      if (station.activity == 0) {
         text = ">1h";
       }
-      else{
-        text = Math.round(60/station.activity);
+      else {
+        text = Math.round(60 / station.activity);
       }
 
     }
-    
+
     return (<Marker
       coordinate={{
         latitude: lat,
@@ -134,17 +136,30 @@ export class MarkerStation extends Component {
       onPress={this.props.onPress}
     >
       <View
-        style={[mapStyle.markerView, {backgroundColor: color }]}
+        style={[mapStyle.markerView, { backgroundColor: color }]}
       >
-        <Text style={{ color: "white" }}>
-          {text}
-          
-        </Text>
-        {((this.props.type == 2) && (text != ">1h"))&&
-          <Text style={{color:"white", fontSize:10, marginTop:-5}}>
+        {(this.props.type == 0) &&
+          <View style={{flexDirection:"row", alignItems:"center"}}>
+            <Text style={mapStyle.markerTextVelib}>
+              {text}
+          </Text>
+            <View style={mapStyle.markerDivider}/>
+            <Text style={mapStyle.markerTextVelib}>
+              {text2}
+          </Text>
+          </View>
+        }
+        {(this.props.type > 0) &&
+          <Text style={mapStyle.markerText}>
+            {text}
+
+          </Text>
+        }
+        {((this.props.type == 2) && (text != ">1h")) &&
+          <Text style={mapStyle.markerTextTime}>
             min
           </Text>
-          }
+        }
       </View>
     </Marker>)
   }

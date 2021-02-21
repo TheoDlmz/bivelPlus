@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, View, FlatList, TouchableOpacity, StatusBar } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, TouchableHighlight, StatusBar } from 'react-native';
 
-import {Loading} from '../components/loading'
+import { Loading } from '../components/loading'
 import { getItemValue } from '../utils/storage'
 
 import { dicoStations } from '../utils/general'
@@ -11,25 +11,33 @@ import { generalStyle } from '../style/generalStyle'
 import { ridesStyle } from '../style/ridesStyle'
 
 
-
-
 export default class RidesView extends React.Component {
 
     state = {
         ridesInfos: undefined,
         stations: undefined,
         mapSelected: undefined,
+        list_broken: []
     };
 
     componentDidMount() {
         getItemValue("@rides_infos")
             .then((res) => this.setState({ ridesInfos: JSON.parse(res) }))
             .catch();
+        getItemValue("@reports")
+            .then((res) => { 
+                let idvelibs = [];
+                let reports = JSON.parse(res);
+                for (let i =0; i < reports.length; i++){
+                    idvelibs.push(reports[i].velib_id);
+                }
+                this.setState({list_broken:idvelibs})
+            }).catch();
         getItemValue("@stations_infos")
             .then((res) => this.setState({ stations: dicoStations(JSON.parse(res)) }))
             .catch();
     }
-    
+
     render() {
 
         if (this.state.ridesInfos == undefined || this.state.stations == undefined) {
@@ -51,15 +59,16 @@ export default class RidesView extends React.Component {
                 </View>
                 <FlatList
                     data={rides.slice(0, 100)}
-                    renderItem={(item) => (                       
+                    renderItem={(item) => (
                         <RideItemView
-                        ride={{
-                            details:item.item,
-                            origin:stations[item.item.stationStart][0],
-                            dest:stations[item.item.stationEnd][0]
-                        }}
-                        onPressReport={() => this.props.navigation.navigate('Report', { bikeId: item.item.bikeId, from: 'Home' })}
-                        onPressSee={() => this.setState({ mapSelected: item.item })}
+                            ride={{
+                                details: item.item,
+                                origin: stations[item.item.stationStart][0],
+                                dest: stations[item.item.stationEnd][0]
+                            }}
+                            broken={this.state.list_broken}
+                            onPressReport={() => this.props.navigation.navigate('Report', { bikeId: item.item.bikeId, from: 'Home' })}
+                            onPressSee={() => this.setState({ mapSelected: item.item })}
                         />)}
                     keyExtractor={item => item.id}
                 />
@@ -73,12 +82,13 @@ export default class RidesView extends React.Component {
                                 }}
                             />
                         </View>
-                        <TouchableOpacity style={ridesStyle.closeButton}
+                        <TouchableHighlight style={ridesStyle.closeButton}
+                            underlayColor={"#540a08"}
                             onPress={() => this.setState({ mapSelected: undefined })}>
                             <Text style={ridesStyle.closeButtonText}>
                                 Fermer
                         </Text>
-                        </TouchableOpacity>
+                        </TouchableHighlight>
                     </View>
                 }
             </View>

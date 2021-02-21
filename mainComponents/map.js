@@ -53,7 +53,7 @@ export default class HomeScreen extends React.Component {
 
     getItemValue("@user_infos")
       .then((res) => this.setState({ userInfos: JSON.parse(res) }))
-      .catch();
+      .catch(() => {});
 
 
 
@@ -95,7 +95,7 @@ export default class HomeScreen extends React.Component {
         },
         (error) => { console.log(error); },
         { enableHighAccuracy: true, timeout: 30000 }
-      ));
+      )).catch();
 
   }
 
@@ -255,8 +255,7 @@ export default class HomeScreen extends React.Component {
     let date_str = "";
     if (today != undefined) {
       date_str = addZero(today.getHours()) + ':' + addZero(today.getMinutes());
-      today_str = "last update : " + date_str;
-
+      today_str = "Mis à jour à " + date_str;
     }
 
     let x = this.state.decal.interpolate({ inputRange: [0, 2], outputRange: [3, 123] })
@@ -467,6 +466,7 @@ export default class HomeScreen extends React.Component {
         <Text style={mapStyle.versionText}>
           {"V" + this.state.version}
         </Text>
+
       </View>
     )
   }

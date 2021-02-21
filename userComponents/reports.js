@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Text, View, StatusBar, FlatList } from 'react-native';
+import { Text, View, StatusBar, FlatList, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
 import { Loading } from '../components/loading'
 import { fetchReports } from '../api/getReports'
 import { popupMessage } from '../utils/miscellaneous'
+import { getItemValue } from '../utils/storage'
 import { ReportItemView } from '../components/reportsUserComponents'
 
 import { generalStyle } from '../style/generalStyle'
@@ -14,17 +15,21 @@ import { userReportStyle } from '../style/reportStyle'
 export default class UserReportsView extends React.Component {
 
     state = {
-        reports: undefined
+        reports: undefined,
+        total: undefined
     };
 
     componentDidMount() {
+        getItemValue("@reports")
+            .then((res) => {this.setState({ reports: JSON.parse(res).reverse() })})
+            .catch();
         fetchReports()
-            .then((res) => this.setState({ reports: JSON.parse(res.data) }))
-            .catch((err) => popupMessage('error', 'Erreur de récuperation des données', err.message));
+            .then((res) => this.setState({total : res.data}))
+            .catch(() => this.setState({total:"?"}));
     }
 
     getReports() {
-        let reports = this.state.reports.user_data;
+        let reports = this.state.reports;
         let reportsList = [];
         let date;
         for (let i = 0; i < reports.length; i++) {
@@ -46,7 +51,6 @@ export default class UserReportsView extends React.Component {
         }
 
         let reportsList = this.getReports();
-
         return (
             <View style={generalStyle.container}>
                 <StatusBar hidden={true} />
@@ -62,7 +66,12 @@ export default class UserReportsView extends React.Component {
                             <View style={userReportStyle.generalStats}>
                                 <View style={userReportStyle.blocGeneralStats}>
                                     <Text style={userReportStyle.statsValue}>
-                                        {this.state.reports.total}
+                                        {this.state.total == undefined &&
+                                        <ActivityIndicator
+                                        animating={true}
+                                        color='#ddd'
+                                        size="large" />}
+                                        {this.state.total}
                                     </Text>
                                     <Text style={userReportStyle.statsText}>
                                         Total
@@ -70,7 +79,7 @@ export default class UserReportsView extends React.Component {
                                 </View>
                                 <View style={userReportStyle.blocGeneralStats}>
                                     <Text style={userReportStyle.statsValue}>
-                                        {this.state.reports.user_data.length}
+                                        {this.state.reports.length}
                                     </Text>
                                     <Text style={userReportStyle.statsText}>
                                         Vous

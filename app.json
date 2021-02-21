@@ -2,10 +2,10 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "primaryColor": "#e1e3e8",
+    "primaryColor": "#0d0e0f",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

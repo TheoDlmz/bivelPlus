@@ -4,8 +4,8 @@ import MapView from 'react-native-maps';
 import { AnimatedPolyline } from './mapsComponents'
 import { Icon } from 'react-native-elements'
 
-import {trajet} from '../utils/mapFunctions'
-import {rideItemStyle } from '../style/ridesStyle'
+import { trajet } from '../utils/mapFunctions'
+import { rideItemStyle } from '../style/ridesStyle'
 
 export class RideMapView extends Component {
 
@@ -55,16 +55,17 @@ export class RideMapView extends Component {
 
 export class RideItemView extends Component {
     state = {
-        ride:this.props.ride.details,
-        origin:this.props.ride.origin,
-        dest:this.props.ride.dest
+        ride: this.props.ride.details,
+        origin: this.props.ride.origin,
+        dest: this.props.ride.dest,
+        broken: this.props.broken
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return false;
+        return nextProps.broken != this.props.broken;
     }
 
-    render(){
+    render() {
         let r = this.state.ride;
         let color = "rgba(50,200,50,0.3)";
         let elec = r.elec;
@@ -81,6 +82,7 @@ export class RideItemView extends Component {
         var arrive = this.state.dest;
         let date = new Date(r.date);
         let timefin = new Date(date.getTime() + r.duration * 1000);
+        let isReported = this.state.broken.includes(r.bikeId);
         return (
             <View style={rideItemStyle.oneRide}>
                 <View style={[rideItemStyle.rideBloc, { backgroundColor: color }]}>
@@ -159,16 +161,35 @@ export class RideItemView extends Component {
                                 {r.dist / 1000 + " km"}
                             </Text>
                         </View>
-                        <View style={rideItemStyle.rideSubBloc}>
-                            <Icon name='pound-box'
-                                type='material-community'
-                                style={{ marginRight: 5 }}
-                                color={"#ddd"}
-                                size={20} />
-                            <Text style={rideItemStyle.textInfo}>
-                                {"ID : " + r.bikeId}
-                            </Text>
-                        </View>
+                        {!isReported &&
+                            <View style={rideItemStyle.rideSubBloc}>
+                                <Icon name='pound-box'
+                                    type='material-community'
+                                    style={{ marginRight: 5 }}
+                                    color={"#ddd"}
+                                    size={20} />
+                                <Text style={rideItemStyle.textInfo}>
+                                    {"ID : " + r.bikeId}
+                                </Text>
+                            </View>
+                        }
+                        {isReported &&
+                            <View style={rideItemStyle.rideSubBloc}>
+                                <Icon name='pound-box'
+                                    type='material-community'
+                                    style={{ marginRight: 5 }}
+                                    color={"#eb7171"}
+                                    size={20} />
+                                <Text style={[rideItemStyle.textInfo,{color:"#eb7171"}]}>
+                                    {"ID : " + r.bikeId}
+                                </Text>
+                                <Icon name='alert-circle'
+                                    type='material-community'
+                                    color={"#eb7171"}
+                                    style={{ marginLeft: 4 }}
+                                    size={20} />
+                            </View>}
+
                     </View>
                 </View>
                 <View style={{ flex: 2 }}>
@@ -183,7 +204,7 @@ export class RideItemView extends Component {
                     {!broken &&
                         <TouchableOpacity
                             onPress={this.props.onPressSee}
-                            style={[rideItemStyle.boutonRide,{backgroundColor: "rgba(100,100,0,0.5)"}]} >
+                            style={[rideItemStyle.boutonRide, { backgroundColor: "rgba(100,100,0,0.5)" }]} >
                             <Icon name='eye'
                                 type='material-community'
                                 color="#fff"
