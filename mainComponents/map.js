@@ -16,6 +16,7 @@ import { TouchableOpacity } from 'react-native';
 
 import { StationChart } from '../components/chartsComponents'
 import { dicoStations } from '../utils/general';
+import { Linking } from 'react-native';
 const heatmapLimit = 0.04;
 
 export default class HomeScreen extends React.Component {
@@ -41,8 +42,9 @@ export default class HomeScreen extends React.Component {
     expend: false,
     expend_size: new Animated.Value(0),
 
-    show_closest: false,
-
+    show_closest: true,
+    show_infos: true,
+    news: undefined
   };
 
 
@@ -53,7 +55,7 @@ export default class HomeScreen extends React.Component {
 
     getItemValue("@user_infos")
       .then((res) => this.setState({ userInfos: JSON.parse(res) }))
-      .catch(() => {});
+      .catch(() => { });
 
 
 
@@ -66,7 +68,8 @@ export default class HomeScreen extends React.Component {
       this.state.type != nextState.type ||
       this.state.delta != nextState.delta ||
       this.state.clic_id != nextState.clic_id ||
-      this.state.expend != nextState.expend);
+      this.state.expend != nextState.expend ||
+      this.show_infos != nextState.show_infos);
   }
   // Desactive la mise à jour automatique de la carte lorsque l'on quitte l'application
   componentWillUnmount() {
@@ -106,7 +109,7 @@ export default class HomeScreen extends React.Component {
   loadData(first) {
     fetchStations()
       .then((res) => {
-        this.setState({ stations: res.data, last_update: new Date() });
+        this.setState({ stations: res.data, last_update: new Date(), news:res.news });
         if (first) {
           this.showClosest();
         }
@@ -462,6 +465,30 @@ export default class HomeScreen extends React.Component {
             </Animated.View>
           </View>
 
+        }
+        {(this.state.show_infos && this.state.news != undefined)  &&
+          <View style={{ position: "absolute", width: "100%", height: "100%", alignItems: "center", justifyContent: "center" }}>
+            <View style={{ padding: 10, backgroundColor: "#224275", width: "80%", height: "60%", alignItems: "center" }}>
+              <TouchableOpacity
+                style={{ width: "100%", height: "90%" }}
+                onPress={() => {if(this.state.news.url != ""){Linking.openURL(this.state.news.url)}}}>
+              <Image
+                style={{ width: "100%", height: "100%" }}
+                source={{
+                  uri: 'http://theo.delemazure.fr/bivelAPI/infos/'+this.state.news.img,
+                }}
+              />
+              </TouchableOpacity>
+              <TouchableHighlight
+                style={{ width: "100%", height: "10%", backgroundColor: "rgb(179, 64, 90)", alignItems: "center", justifyContent: "center" }}
+                underlayColor={"#540a08"}
+                onPress={() => { this.setState({ show_infos: false }) }}>
+                <Text style={{ color: "#eee", fontWeight: "bold", fontSize: 22 }}>
+                  Fermer
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         }
         <Text style={mapStyle.versionText}>
           {"V" + this.state.version}

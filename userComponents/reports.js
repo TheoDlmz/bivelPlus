@@ -21,7 +21,12 @@ export default class UserReportsView extends React.Component {
 
     componentDidMount() {
         getItemValue("@reports")
-            .then((res) => {this.setState({ reports: JSON.parse(res).reverse() })})
+            .then((res) => {
+                if (res == undefined){
+                    this.setState({reports:[]});
+                }else{
+                   this.setState({ reports: JSON.parse(res).reverse() });
+                }})
             .catch();
         fetchReports()
             .then((res) => this.setState({total : res.data}))
