@@ -12,9 +12,9 @@ Vous pouvez ensuite lancer l'application depuis votre téléphone, sans avoir be
 L'application contient de nombreuses possibilités :
 * Une carte des vélibs
 * Une fonction pour signaler facilement des vélos endommagés
-* Une partie utilisateur pour accéder à vos statistiques
+* Une partie utilisateur pour accéder à vos statistiques [BETA]
 
-<img src="http://theo.delemazure.fr/bivelAPI/git/bivel0.jpg" width="250"><img src="http://theo.delemazure.fr/bivelAPI/git/bivel1.jpg" width="250">
-<img src="http://theo.delemazure.fr/bivelAPI/git/bivel2.jpg" width="250">
-<img src="http://theo.delemazure.fr/bivelAPI/git/bivel3.jpg" width="250">
-<img src="http://theo.delemazure.fr/bivelAPI/git/bivel4.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/screenphone0.jpg" width="250"><img src="http://theo.delemazure.fr/bivelAPI/git/screenphone1.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/screenphone2.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/screenphone3.jpg" width="250">
+<img src="http://theo.delemazure.fr/bivelAPI/git/screenphone4.jpg" width="250">
