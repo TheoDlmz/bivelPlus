@@ -1,5 +1,6 @@
 import {success, failure} from '../utils/premises'
-import { velibAPI, header, bivelAPI } from './api_adresses';
+import { header, bivelAPI } from './api_adresses';
+import {getItemValue, setItemValue} from '../utils/storage';
 
 
 export const fetchStations = async () => {
@@ -18,6 +19,23 @@ export const fetchStations = async () => {
       // On récupere les données
       const json = await response.json();
       let records = json["data"];
+      let news = json["news"];
+      if (news.id != undefined){
+        let news_seen = await getItemValue("@news");
+        if (news_seen == undefined){
+          news_seen = [];
+        }else{
+          news_seen = JSON.parse(news_seen);
+        }
+        if (news_seen.includes(news.id)){
+          news = undefined;
+        }else{
+          news_seen.push(news.id);
+          setItemValue("@news",JSON.stringify(news_seen));
+        }
+      }else{
+        news = undefined;
+      }
       let stations = [];
       for (let i =0; i < records.length;i++){
         let fields  = records[i];
@@ -40,7 +58,7 @@ export const fetchStations = async () => {
             "broken":fields.broken
         })
       }
-      return success({data:stations});
+      return success({data:stations,news:news});
 
     }catch(e){
       return failure({ error: 503, message: "Server not reachable"});

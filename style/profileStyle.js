@@ -108,7 +108,7 @@ export const loginStyle = StyleSheet.create({
         
       },
       buttonLogin:{
-        backgroundColor:'#eb801c',
+        backgroundColor:'#6da3de',
         padding:8,
         marginTop:20,
         paddingLeft:20,

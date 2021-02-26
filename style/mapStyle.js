@@ -47,7 +47,8 @@ export const mapStyle = StyleSheet.create({
   versionText: {
     position: 'absolute',
     bottom: 0,
-    right: 0
+    right: 0,
+    fontWeight:"bold"
   },
   animatedBlob: {
     height: 50,
@@ -100,6 +101,28 @@ export const mapStyle = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     maxWidth: "100%"
+  },
+  markerDivider:{ 
+    backgroundColor: "white", 
+    opacity:0.6, 
+    width: 2, 
+    height:40
+  },
+  markerTextVelib:{ 
+    color: "white", 
+    width:17, 
+    textAlign:"center",
+    fontWeight:"bold"
+  },
+  markerTextTime:{ 
+    color: "white",
+     fontSize: 10, 
+     marginTop: -5 ,
+     fontWeight:"bold"
+    },
+  markerText:{ 
+    color: "white", 
+    fontWeight:"bold" 
   }
 
 });

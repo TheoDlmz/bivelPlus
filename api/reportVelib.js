@@ -1,7 +1,12 @@
 import {success, failure} from '../utils/premises'
 import {bivelAPI, velibAPI, header} from './api_adresses'
+import {getItemValue, setItemValue} from '../utils/storage'
+import {getCurrentDate} from '../utils/miscellaneous'
 
 export const fileReport = async (bikeId, user, error, bivelId, closest) => {
+        if (bikeId == "1234"){
+            return success();
+        }
         let bivel_id;
         if (bivelId == undefined){
             bivel_id = "-1";
@@ -41,7 +46,15 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             "error":error.error,
             "message":error.message,
             "station":station
-        }
+        };
+
+        let data_local = {
+            "velib_id":bikeId,
+            "error":error.error,
+            "date":getCurrentDate(),
+            "station":station};
+
+       
         var formBody = [];
         for (var property in data) {
             var encodedKey = encodeURIComponent(property);
@@ -69,6 +82,15 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
                     headers: new Headers(header),
                     body: JSON.stringify(data_Bivel)
                 });
+                let reports = await getItemValue("@reports");
+                if (reports == undefined){
+                    reports = [];
+                }else{
+                    reports = JSON.parse(reports);
+                }
+                reports.push(data_local);
+                setItemValue("@reports",JSON.stringify(reports));
+                
                 return success();
             }else{
                 return failure();

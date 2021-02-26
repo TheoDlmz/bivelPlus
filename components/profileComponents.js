@@ -9,6 +9,7 @@ export class ProfileButton extends React.Component{
             <TouchableOpacity 
                 style={profileComponentsStyle.oneButton}
                 onPress={this.props.onPress} 
+                activeOpacity={0.5}
             >
                 <Icon 
                     name={this.props.icon}

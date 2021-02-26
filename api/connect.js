@@ -34,6 +34,7 @@ export const connect = async (email, password, save) => {
       let payments_infos = json["payments_info"];
       let user_infos = json["user_info"];
       let stations_info = json["stations_info"];
+      let reports = json["reports"];
 
       let data = {};
       data['email'] = email;
@@ -85,6 +86,7 @@ export const connect = async (email, password, save) => {
       await setItemValue('@payments_infos', JSON.stringify(payments));
       await setItemValue('@user_infos', JSON.stringify(user_infos));
       await setItemValue('@stations_infos', JSON.stringify(stations_info));
+      await setItemValue('@reports', JSON.stringify(reports));
 
     } catch (e) {
       return failure({ error: 42, message: "Echec pendant la mise à jour" });
@@ -118,6 +120,7 @@ export const deconnect = async () => {
     await removeItemValue('@username');
     await removeItemValue('@password');
     await removeItemValue('@bivel_infos');
+    await setItemValue('@reports', "[]");
     return success();
   } catch (e) {
     return failure();
