@@ -18,7 +18,7 @@ export const generalStyle = StyleSheet.create({
     },    
     title:{
         fontSize:30,
-        fontWeight:'700',
+        fontFamily:"MontserratRegular",
         color:"#d8deeb"
     },
     sideTopView:{
@@ -49,7 +49,8 @@ export const generalStyle = StyleSheet.create({
         margin: 5
     },
     boldText:{
-        fontWeight:'bold'
+        fontWeight:'bold',
+        fontFamily:"MontserratRegular",
     },
     classic:
     {

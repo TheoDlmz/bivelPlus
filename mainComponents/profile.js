@@ -18,7 +18,12 @@ import { generalStyle } from '../style/generalStyle'
 import { veloBday } from '../utils/badgeFunctions';
 const { width, height } = Dimensions.get("window");
 
+import * as Font from 'expo-font';
 
+let customFonts = {
+    'MontserratRegular': require('../fonts/Montserrat-Regular.ttf'),
+  };
+  
 
 export default class AccountView extends React.Component {
 
@@ -31,8 +36,12 @@ export default class AccountView extends React.Component {
         scrollLayer: 0
     }
 
-
+    async _loadFontsAsync() {
+        await Font.loadAsync(customFonts);
+        this.setState({ fontsLoaded: true });
+      }
     componentDidMount() {
+        this._loadFontsAsync();
         getItemValue("@last_update")
             .then((res) => { this.setState({ logged: true }); this.fetchData(res) })
             .catch(() => this.setState({ logged: false }));
@@ -187,7 +196,7 @@ export default class AccountView extends React.Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={{ marginHorizontal: 30, backgroundColor: "#03031a", padding: 10 }}>
-                                <Text style={{ textAlign: "center", fontSize: 13, color: "#ccc" }}>
+                                <Text style={{ textAlign: "center",fontFamily:"MontserratRegular", fontSize: 13, color: "#ccc" }}>
                                     <Text style={{ fontWeight: "bold", textDecorationLine: "underline" }}
                                     >Attention : {"\n"}
                                     </Text> Ceci n'est pas l'application officielle Vélib',

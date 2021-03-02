@@ -1,194 +1,323 @@
-[{
-    "name":"Bloqué station",
-    "pic":"station.jpg",
-    "subIssues":[{
-        "name":"VBox éteinte",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"L'écran de la VBox du Vélib reste éteint et semble ne pas pouvoir s'allumer"
-    },{
-        "name":"Vélo déverouillé mais ne sort pas de la borne",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo ne sort pas de la bornette une fois dévérouillé"
-    },{
-        "name":"Vélo bloqué en pause (cadenas)",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo est bloqué sur une pause (cadenas sur la Vbox)"
-    },{
-        "name":"Erreur 01",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo ne se déverouille pas (Erreur 01)"
-    },{
-        "name":"Erreur 30",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo ne se déverouille pas (Erreur 30)"
-    },{
-        "name":"Erreur 50",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo ne se déverouille pas (Erreur 50)"
-    },{
-        "name":"Autre erreur",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo ne se déverouille pas"
-    }]
-},{
-    "name":"Roues/Pneus",
-    "pic":"roue.jpg",
-    "subIssues":[{
-        "name":"La roue est tordue",
-        "error":"Roue voilée",
-        "message":"La roue du Vélib est tordue"
-    },{
-        "name":"La roue est bloquée",
-        "error":"Roue bloquée",
-        "message":"La roue du Vélib est bloquée"
-    },{
-        "name":"La roue est dessérée",
-        "error":"Roue desserrée",
-        "message":"La roue du Vélib n'est pas assez sérrée"
-    },{
-        "name":"Pneu crevé ou dégonflé",
-        "error":"Pneu dégonflé ou perçé",
-        "message":"Le pneu du Vélib est à plat"
-    },{
-        "name":"Chambre à air sortie",
-        "error":"Pneu dégonflé ou perçé",
-        "message":"Le pneu est complétement défoncé (chambre à air sortie)"
-    },{
-        "name":"Elément présent dans la roue",
-        "error":"Elément présent dans la roue",
-        "message":"Un élément est présent dans la roue"
-    }]
-},{
-    "name":"Batterie",
-    "pic":"batterie.jpg",
-    "subIssues":[{
-        "name":"La batterie est inefficace",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib semble ne pas fonctionner"
-    },{
-        "name":"La batterie ne se recharge pas",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib semble ne pas se recharger"
-    },{
-        "name":"La batterie marche à moitié",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib ne marche pas toujours, elle marche à moitié"
-    },{
-        "name":"La batterie s'arrête en milieu de course",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
-    }]
-},{
-    "name":"Pédales/Chaîne",
-    "pic":"pedale.jpg",
-    "subIssues":[{
-        "name":"Pédale dans le vide (chaîne manquante ou déraillée)",
-        "error":"Chaîne cassée ou déraillée",
-        "message":"La chaîne est cassée (le vélo pédale dans le vide)"
-    },{
-        "name":"Chaîne qui déraille légerement pendant la course",
-        "error":"Chaîne cassée ou déraillée",
-        "message":"La chaîne déraille légérement pendant la course"
-    },{
-        "name":"Pédale(s) manquante(s)",
-        "error":"Pédale(s) manquante(s)",
-        "message":"Il manque les pédales au Vélib"
-    },{
-        "name":"Pédale(s) bloquée(s)",
-        "error":"Pédalier bloqué",
-        "message":"Les pédales du Vélibs sont bloquées"
-    }]
-},{
-    "name":"Selle",
-    "pic":"selle.jpg",
-    "subIssues":[{
-        "name":"Selle manquante",
-        "error":"Selle manquante",
-        "message":"Il n'y a pas de selle sur ce Vélib"
-    },{
-        "name":"Selle abimée",
-        "error":"Selle et/ou poignées abîmées",
-        "message":"La selle de ce Vélib est abimée"
-    },{
-        "name":"Selle non fixable",
-        "error":"Selle et/ou poignées abîmées",
-        "message":"On ne peut pas fixer la selle sur ce Vélib"
-    }]
-},{
-    "name":"Freins et Poignées",
-    "pic":"frein.jpg",
-    "subIssues":[{
-        "name":"Frein(s) manquant(s)",
-        "error":"Dysfonctionnement des freins",
-        "message":"Il manque des freins sur ce Vélib"
-    },{
-        "name":"Frein(s) coupé(s)",
-        "error":"Dysfonctionnement des freins",
-        "message":"Les freins ont étés coupés"
-    },{
-        "name":"Ne freine pas assez",
-        "error":"Dysfonctionnement des freins",
-        "message":"Il est difficile de freiner avec ce Vélib"
-    },{
-        "name":"Freine trop brutalement",
-        "error":"Dysfonctionnement des freins",
-        "message":"Le Vélib freine trop brutalement"
-    },{
-        "name":"Sélecteur de vitesse cassé",
-        "error":"Selle et/ou poignées abîmées",
-        "message":"Le sélecteur de vitesse est cassé"
-    },{
-        "name":"Poignée(s) abîmée(s)",
-        "error":"Selle et/ou poignées abîmées",
-        "message":"Les poignées du Vélib sont abîmées"
-    },{
-        "name":"Guidon desserré",
-        "error":"Guidon desserré",
-        "message":"Le guidon du vélo n'est pas bien serré"
-    }]
-},{
-    "name":"Lumières/Feux",
-    "pic":"feux.jpg",
-    "subIssues":[{
-        "name":"Feux avants cassés",
-        "error":"Dysfonctionnement des feux",
-        "message":"Le feu AVANT est cassé"
-    },{
-        "name":"Feux arrières cassés",
-        "error":"Dysfonctionnement des feux",
-        "message":"Le feu ARRIERE est cassé"
-    },{
-        "name":"Feux avants et arrières cassés",
-        "error":"Dysfonctionnement des feux",
-        "message":"Les feux AVANT et ARRIERE sont cassés"
-    }]
-},
-{
-    "name":"Autre",
-    "pic":"other.jpg",
-    "subIssues":[{
-        "name":"Vélo volé ou abandonné",
-        "error":"Vélib' volé",
-        "message":"Ce vélo semble avoir été volé."
-    },{
-        "name":"Vélo totalement détruit",
-        "error":"Autre",
-        "message":"Le vélo est complétement hors d'usage, une partie entière du vélo est détruite."
-    },{
-        "name":"Cadre du vélo tordu",
-        "error":"Cadre tordu",
-        "message":"Le cadre du vélo est tordu"
-    },{
-        "name":"Ecran cassé ou dysfonctionnel",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage"
-    },{
-        "name":"La batterie s'arrête en milieu de course",
-        "error":"Vélib' électrique en panne",
-        "message":"La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide"
-    },{
-        "name":"La VBox affiche une erreur",
-        "error":"Vélib' bloqué dans la bornette",
-        "message":"Le vélo est bloqué dans la bornette et affiche une erreur"
-    }]
-}]
+[
+    {
+        "name": "Bloqué station",
+        "pic": "station.jpg",
+        "subIssues": [
+            {
+                "name": "VBox éteinte",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "L'écran de la VBox du Vélib reste éteint et semble ne pas pouvoir s'allumer",
+                "sc": "sc_ecran",
+                "ssc": "ecran_eteint"
+            },
+            {
+                "name": "Vélo déverouillé mais ne sort pas de la borne",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo ne sort pas de la bornette une fois dévérouillé",
+                "sc": "sc_velo_bloque",
+                "ssc": "velo_bloque"
+            },
+            {
+                "name": "Vélo bloqué en pause (cadenas)",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo est bloqué sur une pause (cadenas sur la Vbox)",
+                "sc": "sc_ecran",
+                "ssc": "codes_erreurs"
+            },
+            {
+                "name": "Erreur 01",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo ne se déverouille pas (Erreur 01)",
+                "sc": "sc_ecran",
+                "ssc": "codes_erreurs"
+            },
+            {
+                "name": "Erreur 30",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo ne se déverouille pas (Erreur 30)",
+                "sc": "sc_ecran",
+                "ssc": "codes_erreurs"
+            },
+            {
+                "name": "Erreur 50",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo ne se déverouille pas (Erreur 50)",
+                "sc": "sc_ecran",
+                "ssc": "codes_erreurs"
+            },
+            {
+                "name": "Autre erreur",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo ne se déverouille pas",
+                "sc": "sc_velo_bloque",
+                "ssc": "velo_bloque"
+            }
+        ]
+    },
+    {
+        "name": "Roues/Pneus",
+        "pic": "roue.jpg",
+        "subIssues": [
+            {
+                "name": "La roue est tordue",
+                "error": "Roue voilée",
+                "message": "La roue du Vélib est tordue",
+                "sc": "sc_roues",
+                "ssc": "roue_bloquee_dejantee"
+            },
+            {
+                "name": "La roue est bloquée",
+                "error": "Roue bloquée",
+                "message": "La roue du Vélib est bloquée",
+                "sc": "sc_roues",
+                "ssc": "roue_bloquee_dejantee"
+            },
+            {
+                "name": "La roue est dessérée",
+                "error": "Roue desserrée",
+                "message": "La roue du Vélib n'est pas assez sérrée",
+                "sc": "sc_roues",
+                "ssc": "roue_desserree"
+            },
+            {
+                "name": "Pneu crevé ou dégonflé",
+                "error": "Pneu dégonflé ou perçé",
+                "message": "Le pneu du Vélib est à plat",
+                "sc": "sc_roues",
+                "ssc": "pneu_creve"
+            },
+            {
+                "name": "Chambre à air sortie",
+                "error": "Pneu dégonflé ou perçé",
+                "message": "Le pneu est complétement défoncé (chambre à air sortie)",
+                "sc": "sc_roues",
+                "ssc": "pneu_creve"
+            }
+        ]
+    },
+    {
+        "name": "Batterie",
+        "pic": "batterie.jpg",
+        "subIssues": [
+            {
+                "name": "La batterie est inefficace",
+                "error": "Vélib' électrique en panne",
+                "message": "La batterie du Vélib semble ne pas fonctionner",
+                "sc": "sc_assistance_electrique",
+                "ssc": "assistance_electrique"
+            },
+            {
+                "name": "La batterie ne se recharge pas",
+                "error": "Vélib' électrique en panne",
+                "message": "La batterie du Vélib semble ne pas se recharger",
+                "sc": "sc_assistance_electrique",
+                "ssc": "assistance_electrique"
+            },
+            {
+                "name": "La batterie marche à moitié",
+                "error": "Vélib' électrique en panne",
+                "message": "La batterie du Vélib ne marche pas toujours, elle marche à moitié",
+                "sc": "sc_assistance_electrique",
+                "ssc": "assistance_electrique"
+            },
+            {
+                "name": "La batterie s'arrête en milieu de course",
+                "error": "Vélib' électrique en panne",
+                "message": "La batterie du Vélib s'arrête de fonctionner au milieu de trajet, sans que celle-ci ne soit vide",
+                "sc": "sc_assistance_electrique",
+                "ssc": "assistance_electrique"
+            }
+        ]
+    },
+    {
+        "name": "Pédales/Chaîne",
+        "pic": "pedale.jpg",
+        "subIssues": [
+            {
+                "name": "Pédale dans le vide (chaîne manquante ou déraillée)",
+                "error": "Chaîne cassée ou déraillée",
+                "message": "La chaîne est cassée (le vélo pédale dans le vide)",
+                "sc": "sc_vitesses",
+                "ssc": "chaine_cassee_deraillee"
+            },
+            {
+                "name": "Chaîne qui déraille légerement pendant la course",
+                "error": "Chaîne cassée ou déraillée",
+                "message": "La chaîne déraille légérement pendant la course",
+                "sc": "sc_vitesses",
+                "ssc": "chaine_cassee_deraillee"
+            },
+            {
+                "name": "Problème de vitesses",
+                "error": "Chaîne cassée ou déraillée",
+                "message": "Les vitesses ne marchent pas corréctement",
+                "sc": "sc_vitesses",
+                "ssc": "vitesses_defaillantes"
+            },
+            {
+                "name": "Pédale(s) manquante(s)",
+                "error": "Pédale(s) manquante(s)",
+                "message": "Il manque les pédales au Vélib",
+                "sc": "sc_vitesses",
+                "ssc": "pedale_cassee"
+            },
+            {
+                "name": "Pédale(s) bloquée(s)",
+                "error": "Pédalier bloqué",
+                "message": "Les pédales du Vélibs sont bloquées",
+                "sc": "sc_vitesses",
+                "ssc": "pedale_cassee"
+            }
+        ]
+    },
+    {
+        "name": "Selle",
+        "pic": "selle.jpg",
+        "subIssues": [
+            {
+                "name": "Selle manquante",
+                "error": "Selle manquante",
+                "message": "Il n'y a pas de selle sur ce Vélib",
+                "sc": "sc_selle",
+                "ssc": "selle_cassee"
+            },
+            {
+                "name": "Selle abimée",
+                "error": "Selle et/ou poignées abîmées",
+                "message": "La selle de ce Vélib est abimée",
+                "sc": "sc_selle",
+                "ssc": "selle_cassee"
+            },
+            {
+                "name": "Selle non fixable",
+                "error": "Selle et/ou poignées abîmées",
+                "message": "On ne peut pas fixer la selle sur ce Vélib",
+                "sc": "sc_selle",
+                "ssc": "reglage_defaillant"
+            }
+        ]
+    },
+    {
+        "name": "Freins et Poignées",
+        "pic": "frein.jpg",
+        "subIssues": [
+            {
+                "name": "Frein(s) manquant(s)",
+                "error": "Dysfonctionnement des freins",
+                "message": "Il manque des freins sur ce Vélib",
+                "sc": "sc_freins",
+                "ssc": "freins_casses"
+            },
+            {
+                "name": "Frein(s) coupé(s)",
+                "error": "Dysfonctionnement des freins",
+                "message": "Les freins ont étés coupés",
+                "sc": "sc_freins",
+                "ssc": "freins_casses"
+            },
+            {
+                "name": "Ne freine pas assez",
+                "error": "Dysfonctionnement des freins",
+                "message": "Il est difficile de freiner avec ce Vélib",
+                "sc": "sc_freins",
+                "ssc": "freins_defaillants"
+            },
+            {
+                "name": "Freine trop brutalement",
+                "error": "Dysfonctionnement des freins",
+                "message": "Le Vélib freine trop brutalement",
+                "sc": "sc_freins",
+                "ssc": "freins_defaillants"
+            },
+            {
+                "name": "Freine trop bruyament",
+                "error": "Dysfonctionnement des freins",
+                "message": "Le Vélib freine trop bruyalement",
+                "sc": "sc_freins",
+                "ssc": "freins_bruyants"
+            },
+            {
+                "name": "Sélecteur de vitesse cassé",
+                "error": "Selle et/ou poignées abîmées",
+                "message": "Le sélecteur de vitesse est cassé",
+                "sc": "sc_vitesses",
+                "ssc": "vitesses_defaillantes"
+            },
+            {
+                "name": "Poignée(s) abîmée(s)",
+                "error": "Selle et/ou poignées abîmées",
+                "message": "Les poignées du Vélib sont abîmées",
+                "sc": "sc_guidon",
+                "ssc": "poignees_manquantes"
+            },
+            {
+                "name": "Sonnette cassée",
+                "error": "Selle et/ou poignées abîmées",
+                "message": "La sonnette du Vélib ne fonctionne pas",
+                "sc": "sc_guidon",
+                "ssc": "sonnette"
+            }
+        ]
+    },
+    {
+        "name": "Lumières/Feux",
+        "pic": "feux.jpg",
+        "subIssues": [
+            {
+                "name": "Feux avants cassés",
+                "error": "Dysfonctionnement des feux",
+                "message": "Le feu AVANT est cassé",
+                "sc": "sc_eclairage",
+                "ssc": "feux_avant"
+            },
+            {
+                "name": "Feux arrières cassés",
+                "error": "Dysfonctionnement des feux",
+                "message": "Le feu ARRIERE est cassé",
+                "sc": "sc_eclairage",
+                "ssc": "feux_arriere"
+            },
+            {
+                "name": "Feux avants et arrières cassés",
+                "error": "Dysfonctionnement des feux",
+                "message": "Les feux AVANT et ARRIERE sont cassés",
+                "sc": "sc_eclairage",
+                "ssc": "feux_avant_arriere"
+            }
+        ]
+    },
+    {
+        "name": "Autre",
+        "pic": "other.jpg",
+        "subIssues": [
+            {
+                "name": "Vélo volé ou abandonné",
+                "error": "Vélib' volé",
+                "message": "Ce vélo semble avoir été volé.",
+                "sc": "sc_velo_abandonne",
+                "ssc": "velo_abandonne"
+            },
+            {
+                "name": "Vélo totalement détruit",
+                "error": "Autre",
+                "message": "Le vélo est complétement hors d'usage, une partie entière du vélo est détruite.",
+                "sc": "Autre",
+                "ssc": "Autre"
+            },
+            {
+                "name": "Ecran cassé ou dysfonctionnel",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "L'écran de la VBox du Vélib est cassé/dysfonctionnel, rendant le Vélib hors d'usage",
+                "sc": "sc_ecran",
+                "ssc": "ecran_non_lisible"
+            },
+            {
+                "name": "La VBox affiche une erreur",
+                "error": "Vélib' bloqué dans la bornette",
+                "message": "Le vélo est bloqué dans la bornette et affiche une erreur",
+                "sc": "sc_ecran",
+                "ssc": "codes_erreurs"
+            }
+        ]
+    }
+]

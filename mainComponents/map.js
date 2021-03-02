@@ -17,6 +17,15 @@ import { TouchableOpacity } from 'react-native';
 import { StationChart } from '../components/chartsComponents'
 import { dicoStations } from '../utils/general';
 import { Linking } from 'react-native';
+
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font';
+
+let customFonts = {
+  'MontserratRegular': require('../fonts/Montserrat-Regular.ttf'),
+};
+
+
 const heatmapLimit = 0.04;
 
 export default class HomeScreen extends React.Component {
@@ -47,8 +56,13 @@ export default class HomeScreen extends React.Component {
     news: undefined
   };
 
+  async _loadFontsAsync() {
+    await Font.loadAsync(customFonts);
+    this.setState({ fontsLoaded: true });
+  }
 
   componentDidMount() {
+    this._loadFontsAsync();
     let infos = require('../app.json');
     this.setState({ version: infos.expo.version });
     this.loadData(true);
@@ -253,6 +267,10 @@ export default class HomeScreen extends React.Component {
 
   render() {
 
+    if (!this.state.fontsLoaded){
+
+      return <AppLoading/>
+    }
     var today = this.state.last_update;
     let today_str = "Loading...";
     let date_str = "";
@@ -314,7 +332,7 @@ export default class HomeScreen extends React.Component {
               style={{ height: 40, width: 180 }}
               source={require('../assets/logo.png')}
             />
-            <Text style={{ color: "white" }}>
+            <Text style={{ color: "white", fontFamily: 'MontserratRegular'  }}>
               {today_str}
             </Text>
           </View>
@@ -376,9 +394,10 @@ export default class HomeScreen extends React.Component {
         {this.state.clic_id >= 0 &&
           <View style={mapStyle.bottomView}>
             <View style={mapStyle.bottomViewInfos}>
-              <Text style={[mapStyle.stationName, { flex: 8 }]}>
+              <Text style={[{ flex: 8, }, mapStyle.stationName, ]}>
                 {this.state.stations[this.state.clic_id].name}
               </Text>
+              
               <TouchableOpacity
                 style={{ flex: 1 }}
                 onPress={() => this.expendBottom(!this.state.expend)}>
@@ -391,7 +410,7 @@ export default class HomeScreen extends React.Component {
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: "row", width: "100%", flexWrap: "wrap" }}>
+            <View style={{ flexDirection: "row", width: "100%", flexWrap: "wrap",justifyContent:"center" }}>
               <View style={mapStyle.bottomTextBulle}>
                 <Text style={mapStyle.bottomTextValue}>
                   {this.state.stations[this.state.clic_id].meca}

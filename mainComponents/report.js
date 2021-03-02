@@ -5,13 +5,19 @@ import { Icon } from 'react-native-elements';
 import { fileReport } from '../api/reportVelib';
 import { getItemValue } from '../utils/storage';
 import { fetchReports } from '../api/getReports';
-import {getJson} from '../api/getJsonFile'
+import { getJson } from '../api/getJsonFile'
 
 import { reportStyle } from '../style/reportStyle'
 import { generalStyle } from '../style/generalStyle'
 import { TextInput } from 'react-native';
 import { popupMessage } from '../utils/miscellaneous';
 
+import * as Font from 'expo-font';
+
+let customFonts = {
+    'MontserratRegular': require('../fonts/Montserrat-Regular.ttf'),
+    'MontserratBold': require('../fonts/Montserrat-Bold.ttf'),
+};
 
 const { width, height } = Dimensions.get("window");
 
@@ -31,7 +37,7 @@ export default class SignalScreen extends React.Component {
         bivelId: undefined,
         finalMessage: "Rapport en cours d'envoi...",
         other: "",
-        total:0
+        total: 0
     }
 
     sendReport(e) {
@@ -53,12 +59,16 @@ export default class SignalScreen extends React.Component {
         }
 
         fileReport(this.state.bikeId, user, e, this.state.bivelId, this.state.closest)
-            .then(() => {this.scrollLayerMini.scrollToEnd({duration:2500});this.setState({ finalMessage: "Rapport envoyé avec succès !" })})
+            .then(() => { this.scrollLayerMini.scrollToEnd({ duration: 2500 }); this.setState({ finalMessage: "Rapport envoyé avec succès !" }) })
             .catch(() => { this.setState({ finalMessage: "Erreur dans l'envoi du rapport." }) })
 
     }
-
+    async _loadFontsAsync() {
+        await Font.loadAsync(customFonts);
+        this.setState({ fontsLoaded: true });
+    }
     componentDidMount() {
+        this._loadFontsAsync();
         getItemValue("@bivel_infos")
             .then((res) => this.setState({ bivelId: JSON.parse(res).id }))
             .catch();
@@ -69,8 +79,8 @@ export default class SignalScreen extends React.Component {
             .then((res) => this.setState({ total: res.data }))
             .catch();
         getJson("report.json")
-            .then((res) => this.setState({error: res.data}))
-            .catch(() => popupMessage("error","Pas de connexion","Vous devez vous connecter à internet pour signaler un Vélib"))
+            .then((res) => this.setState({ error: res.data }))
+            .catch(() => popupMessage("error", "Pas de connexion", "Vous devez vous connecter à internet pour signaler un Vélib"))
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
 
     }
@@ -129,7 +139,7 @@ export default class SignalScreen extends React.Component {
                                         style={reportStyle.imageError}
                                         source={{ uri: 'http://theo.delemazure.fr/bivelAPI/reports_pic/' + e.pic }}
                                     />
-                                    <Text style={{ fontWeight: 'bold' }}>
+                                    <Text style={{ fontFamily:"MontserratBold", }}>
                                         {e.name}
                                     </Text>
                                 </View>
@@ -139,7 +149,7 @@ export default class SignalScreen extends React.Component {
 
 
 
-                    <View style={reportStyle.containerBoxes}>
+                    <ScrollView style={reportStyle.containerBoxes}>
                         <TouchableOpacity
                             onPress={() => { this.setState({ currentError: undefined }); this.scrollLayer.scrollTo({ x: 0 }) }}
                             underlayColor=''
@@ -186,7 +196,9 @@ export default class SignalScreen extends React.Component {
                                 style={reportStyle.textInputSubmit}
                                 onPress={() => this.sendReport({
                                     error: "Autre",
-                                    message: this.state.other
+                                    message: this.state.other,
+                                    sc: "Autre",
+                                    ssc: "Autre"
                                 })}>
                                 <Icon
                                     name='check'
@@ -197,23 +209,23 @@ export default class SignalScreen extends React.Component {
                                 />
                             </TouchableOpacity>
                         </View>
-                    </View>
+                    </ScrollView>
 
 
-                    <View style={[reportStyle.displayMessage,{marginTop:-20}]}>
-                        <View style={{height:70}}>
-                        <ScrollView 
-                        showsVerticalScrollIndicator={false}
-                        ref={(node) => this.scrollLayerMini = node}
-                        scrollEnabled={false}>
-                            <Text style={{fontSize:62, color:"#eee",alignSelf:"center"}}>
-                                {parseInt(this.state.total)}
-                            </Text>
-                            
-                            <Text style={{fontSize:62, color:"#eee",alignSelf:"center"}}>
-                                {parseInt(this.state.total)+1}
-                            </Text>
-                        </ScrollView>
+                    <View style={[reportStyle.displayMessage, { marginTop: -20 }]}>
+                        <View style={{ height: 70 }}>
+                            <ScrollView
+                                showsVerticalScrollIndicator={false}
+                                ref={(node) => this.scrollLayerMini = node}
+                                scrollEnabled={false}>
+                                <Text style={{fontFamily:"MontserratRegular", fontSize: 62, color: "#eee", alignSelf: "center" }}>
+                                    {parseInt(this.state.total)}
+                                </Text>
+
+                                <Text style={{fontFamily:"MontserratRegular", fontSize: 62, color: "#eee", alignSelf: "center" }}>
+                                    {parseInt(this.state.total) + 1}
+                                </Text>
+                            </ScrollView>
                         </View>
                         <View style={reportStyle.reportMessage}>
                             <Text style={reportStyle.reportMessageText}>
