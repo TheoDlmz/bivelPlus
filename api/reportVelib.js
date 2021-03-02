@@ -4,9 +4,10 @@ import {getItemValue, setItemValue} from '../utils/storage'
 import {getCurrentDate} from '../utils/miscellaneous'
 
 export const fileReport = async (bikeId, user, error, bivelId, closest) => {
-        if (bikeId == "1234"){
+        if ((bikeId == "1234")||(bikeId == "0000")){
             return success();
         }
+
         let bivel_id;
         if (bivelId == undefined){
             bivel_id = "-1";
@@ -19,27 +20,33 @@ export const fileReport = async (bikeId, user, error, bivelId, closest) => {
             message += "\n A proximité de la station "+closest;    
             station = closest;
         }
-        let meta_error = "Vélib' endommagé en station";
+        let meta_error = "c_velo_endommage";
         if (error.error == "Vélib' volé"){
-            meta_error = "Vélib' abandonné hors station"
+            meta_error = "c_velo_abandonne"
         }
         let data = {
-            "00N0Y00000RKgb2":bikeId,
+            "origin":	"Web",
+            "orgid":	"00D0Y0000035SQ3",
+            "debug":	"0",
+            "debugEmail":	"",
+            "retURL":	"",
+            "recordType":	"0120Y000000Kezr",
+            "00N0Y00000RKgb8":'1',
+            "00N0Y00000RKgb7":	user.firstname,
+            "name":	user.lastname,
+            "email":user.email,
+            "type":	meta_error,
             "00N0Y00000RKgb3":user.id,
-            "retURL":"",
-            "recordType":"0120Y000000Kezr",
-            "description":"",
-            "type":"Incident",
-            "00N0Y00000RKgb3":meta_error,
-            "00N0Y00000RKgat":error.error,
-            "orgid":"00D0Y0000035SQ3",
-            "00N0Y00000RKgb7":user.firstname,
-            "00N0Y00000RKgb8":message + "\n Envoyé depuis BVP.",
-            "debugEmail":"",
-            "name":user.lastname,
-            "email":user.email
+            "00N0Y00000RKgb2":	bikeId,
+            "00N0Y00000RKgb5":	error.sc,
+            "Numero_de_bornette__c":	"",
+            "00N0Y00000RKgat":	error.ssc,
+            "Adresse__c":	station,
+            "description":	message + "\n Envoyé depuis Bivel.",
+            "submit":	"",
         };
         
+
         let data_Bivel ={
             "bikeId":bikeId,
             "bivelId":bivel_id,

@@ -14,7 +14,6 @@ import RankingView from './userComponents/ranking'
 import UserReportsView from './userComponents/reports'
 import Toast from 'react-native-toast-message';
 
-
 const options = {
   headerShown: false,
   header: {

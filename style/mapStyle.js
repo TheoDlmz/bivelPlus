@@ -36,19 +36,21 @@ export const mapStyle = StyleSheet.create({
 
   pseudoText: {
     marginTop: -8,
-    fontWeight: "bold",
-    color: '#ddd'
+    color: '#ddd',
+    fontSize:12,
+    fontFamily: 'MontserratRegular' 
   },
   signalerText: {
     marginTop: -4,
-    fontWeight: "bold",
-    color: 'rgb(230, 221, 62)'
+    fontSize:12,
+    color: 'rgb(230, 221, 62)',
+    fontFamily: 'MontserratRegular' 
   },
   versionText: {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    fontWeight:"bold"
+    fontFamily: 'MontserratRegular' 
   },
   animatedBlob: {
     height: 50,
@@ -79,21 +81,21 @@ export const mapStyle = StyleSheet.create({
   },
   stationName: {
     color: "white",
-    fontWeight: "700",
+    fontFamily:"MontserratRegular",
     fontSize: 18,
   },
   bottomTextValue: {
     color: "white",
-    fontWeight: "800",
+    fontFamily:"MontserratRegular",
     fontSize: 22
   },
   bottomTextDescVelo: {
     color: "#ddd",
     textAlign: 'center',
+    fontFamily:"MontserratRegular",
     fontSize: 10
   },
   bottomTextBulle: {
-    margin: 5,
     alignItems: "center",
     width:"30%",
   },
@@ -118,11 +120,11 @@ export const mapStyle = StyleSheet.create({
     color: "white",
      fontSize: 10, 
      marginTop: -5 ,
-     fontWeight:"bold"
+     fontFamily:"MontserratRegular",
     },
   markerText:{ 
     color: "white", 
-    fontWeight:"bold" 
+    fontFamily:"MontserratRegular"
   }
 
 });

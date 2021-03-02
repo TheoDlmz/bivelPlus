@@ -2,7 +2,7 @@
   "expo": {
     "name": "bivelPlus",
     "slug": "bivelPlus",
-    "version": "0.2.8",
+    "version": "0.3.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#4460C9",
@@ -25,9 +25,9 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode":2,
+      "versionCode":5,
       "package": "com.theodlmz.bivelPlus",
-      "permissions": [ "CAMERA", "LOCATION" ],
+      "permissions": [ "CAMERA", "ACCESS_FINE_LOCATION" ],
       "config":{
         "googleMaps":{
           "apiKey":"AIzaSyBPI2CVkhaUCfxvcxPDdYkVqXBfAerTm7Q"

@@ -12,6 +12,12 @@ import { generalStyle } from '../style/generalStyle'
 import { userReportStyle } from '../style/reportStyle'
 
 
+import * as Font from 'expo-font';
+
+let customFonts = {
+    'MontserratRegular': require('../fonts/Montserrat-Regular.ttf'),
+};
+
 export default class UserReportsView extends React.Component {
 
     state = {
@@ -19,18 +25,26 @@ export default class UserReportsView extends React.Component {
         total: undefined
     };
 
+
+    async _loadFontsAsync() {
+        await Font.loadAsync(customFonts);
+        this.setState({ fontsLoaded: true });
+    }
+
     componentDidMount() {
+        this._loadFontsAsync();
         getItemValue("@reports")
             .then((res) => {
-                if (res == undefined){
-                    this.setState({reports:[]});
-                }else{
-                   this.setState({ reports: JSON.parse(res).reverse() });
-                }})
+                if (res == undefined) {
+                    this.setState({ reports: [] });
+                } else {
+                    this.setState({ reports: JSON.parse(res).reverse() });
+                }
+            })
             .catch();
         fetchReports()
-            .then((res) => this.setState({total : res.data}))
-            .catch(() => this.setState({total:"?"}));
+            .then((res) => this.setState({ total: res.data }))
+            .catch(() => this.setState({ total: "?" }));
     }
 
     getReports() {
@@ -72,10 +86,10 @@ export default class UserReportsView extends React.Component {
                                 <View style={userReportStyle.blocGeneralStats}>
                                     <Text style={userReportStyle.statsValue}>
                                         {this.state.total == undefined &&
-                                        <ActivityIndicator
-                                        animating={true}
-                                        color='#ddd'
-                                        size="large" />}
+                                            <ActivityIndicator
+                                                animating={true}
+                                                color='#ddd'
+                                                size="large" />}
                                         {this.state.total}
                                     </Text>
                                     <Text style={userReportStyle.statsText}>

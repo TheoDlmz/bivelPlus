@@ -104,7 +104,8 @@ export const loginStyle = StyleSheet.create({
         marginBottom:10,
         borderRadius:50,
         paddingLeft:20,
-        paddingRight:20
+        paddingRight:20,
+        fontFamily:"MontserratRegular",
         
       },
       buttonLogin:{
@@ -118,7 +119,7 @@ export const loginStyle = StyleSheet.create({
       buttonText:{
         color:'white',
         fontSize:19,
-        fontWeight:'bold'
+        fontFamily:"MontserratRegular",
       },
       loginBox:{
           padding:20

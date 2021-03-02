@@ -24,11 +24,12 @@ export const qrReaderStyle = StyleSheet.create({
     goText:{
         fontSize:40,
         color:"white",
-        fontWeight:"bold"
+        fontFamily:"MontserratRegular",
     },
     textScanQR:{
         color:"white",
-        fontSize:25,
+        fontSize:22,
+        fontFamily:"MontserratRegular",
     },
     inputId:{
         width:250,
@@ -38,6 +39,7 @@ export const qrReaderStyle = StyleSheet.create({
         textAlign:"center",
         fontSize:18,
         color:"white",
+        fontFamily:"MontserratRegular",
     },
     topTextView:{
         width:250,
@@ -50,7 +52,8 @@ export const qrReaderStyle = StyleSheet.create({
     errorMessage:{
         color:"white",
         fontSize:20,
-        paddingTop:50
+        paddingTop:50,
+        fontFamily:"MontserratRegular",
 
     }
 });
@@ -65,12 +68,12 @@ export const reportStyle = StyleSheet.create({
     reportMessage: {
         textAlign: "center",
         fontSize:16,
-        fontWeight:"500"
+        fontFamily:"MontserratRegular",
     },
     textInputText:{
         textAlign: "center",
         fontSize:16,
-        fontWeight:"500",
+        fontFamily:"MontserratRegular",
         flex:1,
         margin:10        
     },
@@ -78,6 +81,7 @@ export const reportStyle = StyleSheet.create({
         fontSize: 25,
          color:"#eee",
          textAlign:"center",
+         fontFamily:"MontserratRegular",
     },
     displayMessage: {
         alignItems: "stretch",
@@ -119,7 +123,7 @@ export const reportStyle = StyleSheet.create({
         flexDirection:"row"
     },
     titleReport: {
-        fontWeight: 'bold',
+        fontFamily:"MontserratBold",
         fontSize: 20
     },
     imageError: {
@@ -137,7 +141,8 @@ export const reportStyle = StyleSheet.create({
     },
     textRetour:{ 
         textAlign: "center", 
-        color: '#ddd' 
+        color: '#ddd',
+        fontFamily:"MontserratBold", 
     },
     boxAgain:
     {
@@ -178,17 +183,17 @@ export const userReportStyle = StyleSheet.create({
     statsValue: {
         color: "#eee",
         fontSize: 45,
-        fontWeight: "700"
+        fontFamily:"MontserratRegular",
     },
     statsText: {
         color: "#eee",
         fontSize: 17,
-        fontWeight: "600"
+        fontFamily:"MontserratRegular",
     },
     signalementText:{ 
         fontSize: 16, 
         color: "#ddd", 
-        fontWeight: "bold" 
+        fontFamily:"MontserratRegular",
     }
 
 })
@@ -210,7 +215,7 @@ export const reportItemStyle = StyleSheet.create({
     },
     dateText: {
         color: "#ccc",
-        fontWeight: "500",
+        fontFamily:"MontserratRegular",
     },
     dividerDate: {
         flex: 1,
@@ -220,7 +225,7 @@ export const reportItemStyle = StyleSheet.create({
     },
     reportText: {
         color: "#bbb",
-        fontWeight: "600"
+        fontFamily:"MontserratRegular",
     },
     reportItemLocation:
     {
@@ -231,6 +236,7 @@ export const reportItemStyle = StyleSheet.create({
     reportItemLocationText: {
         color: "#aaa",
         fontSize: 12,
+        fontFamily:"MontserratRegular",
     }
 
 
